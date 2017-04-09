@@ -16,9 +16,9 @@ export class AuthService {
     return this.authState !== null;
   }
 
-  signInWithGoogle(): firebase.Promise<FirebaseAuthState> {
+  signInWithFacebook(): firebase.Promise<FirebaseAuthState> {
     return this.auth$.login({
-      provider: AuthProviders.Google,
+      provider: AuthProviders.Facebook,
       method: AuthMethods.Popup
     });
   }
@@ -29,7 +29,7 @@ export class AuthService {
 
   displayName(): string {
     if (this.authState != null) {
-      return this.authState.google.displayName;
+      return this.authState.facebook.displayName;
     } else {
       return '';
     }

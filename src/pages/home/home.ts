@@ -14,13 +14,13 @@ export class HomePage {
   constructor(public navCtrl: NavController, af: AngularFire, private _auth: AuthService) {
 
   }
-  signInWithGoogle(): void {
-    this._auth.signInWithGoogle()
+  signInWithFacebook(): void {
+    this._auth.signInWithFacebook()
       .then(() => this.onSignInSuccess());
   }
 
   private onSignInSuccess(): void {
     this.authenticated = true;
-    console.log("Google display name ",this._auth.displayName());
+    console.log("Facebook display name ",this._auth.displayName());
   }
 }
