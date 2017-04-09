@@ -1,4 +1,5 @@
 <ion-content padding>
-	<h1>{{score}}</h1>
-  <button ion-button (tap)="score = score + 1">+1</button>
+	<h1 *ngIf="authenticated">{{score}}</h1>
+  <button *ngIf="authenticated" ion-button (tap)="score = score + 1">+1</button>
+  <button *ngIf="!authenticated" ion-button outline (tap)="signInWithGoogle()">Google Sign-in</button>
 </ion-content>

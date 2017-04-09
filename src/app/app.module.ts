@@ -8,6 +8,7 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 
 import { AngularFireModule } from 'angularfire2';
+import { AuthService } from '../providers/auth-service';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyA-qxU8pP8stbuuncVG4j_iSPfPvQl6GD0",
@@ -36,7 +37,8 @@ export const firebaseConfig = {
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    AuthService
   ]
 })
 export class AppModule {}
