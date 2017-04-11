@@ -1,5 +1,12 @@
 <ion-content padding>
-	<h1 *ngIf="authenticated">{{score}}</h1>
-  <button *ngIf="authenticated" ion-button (tap)="score = score + 1">+1</button>
-  <button *ngIf="!authenticated" ion-button outline (tap)="signInWithFacebook()">Facebook Sign-in</button>
+	<div class="full-center">
+		<div *ngIf="!authenticated" class="text-center">
+			<h1>BadHacks 2017</h1>
+			<button ion-button outline (tap)="signInWithFacebook()">Facebook Sign-in</button>
+		</div>
+		<div *ngIf="authenticated" class="text-center">
+			<h1 *ngIf="authenticated">{{ (myScore | async)?.$value }}</h1>
+			<button *ngIf="authenticated" ion-button (tap)="incrementScore()">+1</button>
+		</div>
+  </div>
 </ion-content>

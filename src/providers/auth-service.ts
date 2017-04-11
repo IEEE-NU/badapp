@@ -37,7 +37,15 @@ export class AuthService {
     this.auth$.logout();
   }
 
-  displayName(): string {
+  getUID(): string {
+    if (this.authState != null) {
+      return this.authState.facebook.uid;
+    } else {
+      return '';
+    }
+  }
+
+  getDisplayName(): string {
     if (this.authState != null) {
       return this.authState.facebook.displayName;
     } else {
