@@ -1,12 +1,15 @@
-import { Component, Pipe } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
 import { AuthService } from '../../providers/auth-service';
 import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
 
+// import { ReversePipe } from '../../pipes/reverse.pipe';
+
 @Component({
   selector: 'page-home',
-  templateUrl: 'home.html'
+  templateUrl: 'home.html',
+  // providers: [ReversePipe]
 })
 export class HomePage {
   user: FirebaseObjectObservable<any>;
