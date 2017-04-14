@@ -1,5 +1,5 @@
 <ion-content padding>
-	<div class="full-center">
+	<div class="half-center">
 		<div *ngIf="!authenticated" class="text-center">
 			<h1>BadHacks 2017</h1>
 			<button ion-button outline (tap)="signInWithFacebook()">Facebook Sign-in</button>
@@ -9,9 +9,12 @@
 			<button *ngIf="authenticated" ion-button (tap)="incrementScore()">+1</button>
 		</div>
   </div>
-  <ion-list *ngIf="authenticated">
-  	<ion-item class="text" *ngFor="let user of leaderboard | async">
-  		{{user.name}}: {{user.score}}
-  	</ion-item>
-  </ion-list>
+  <div class="half-center" *ngIf="authenticated">
+  	<h2>Top 5 Leaderboard</h2>
+	  <ion-list>
+	  	<ion-item class="text" *ngFor="let user of leaderboard | async">
+	  		{{user.name}}: {{user.score}}
+	  	</ion-item>
+	  </ion-list>
+	</div>
 </ion-content>
