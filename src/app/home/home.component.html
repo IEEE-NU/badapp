@@ -5,7 +5,7 @@
 	</div>
 	<div *ngIf="authenticated" class="text-center">
 		<h1 *ngIf="authenticated">{{ (user | async)?.score }}</h1>
-		<button md-button *ngIf="authenticated" (tap)="incrementScore()">+1</button>
+		<button md-raised-button *ngIf="authenticated" (tap)="incrementScore()">+1</button>
 	</div>
 </div>
 <div class="half-center" *ngIf="authenticated">
