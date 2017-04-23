@@ -1,11 +1,11 @@
 <div class="half-center">
 	<div *ngIf="!authenticated" class="text-center">
 		<h1>BadHacks 2017</h1>
-		<button (tap)="signInWithFacebook()">Facebook Sign-in</button>
+		<button md-raised-button color="primary" (tap)="signInWithFacebook()">Facebook Sign-in</button>
 	</div>
 	<div *ngIf="authenticated" class="text-center">
 		<h1 *ngIf="authenticated">{{ (user | async)?.score }}</h1>
-		<button *ngIf="authenticated" (tap)="incrementScore()">+1</button>
+		<button md-button *ngIf="authenticated" (tap)="incrementScore()">+1</button>
 	</div>
 </div>
 <div class="half-center" *ngIf="authenticated">

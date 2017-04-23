@@ -1,5 +1,6 @@
-import { ErrorHandler, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { MaterialModule } from './material.module';
 
 import { AppComponent } from './app.component';
 import { HomePage } from './home/home.component';
@@ -26,11 +27,12 @@ export const firebaseConfig = {
 const firebaseAuthConfig = {
   provider: AuthProviders.Facebook,
   method: AuthMethods.Redirect
-}
+};
 
 @NgModule({
   imports: [
     BrowserModule,
+    MaterialModule,
     AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig)
   ],
   declarations: [
@@ -41,7 +43,7 @@ const firebaseAuthConfig = {
   providers: [
     AuthService
   ],
-  exports: [AppComponent],
+  exports: [AppComponent, MaterialModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

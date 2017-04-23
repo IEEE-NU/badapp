@@ -1,5 +1,8 @@
 {
   "rules": {
+    "semicolon": [
+      "always"
+    ],
     "no-duplicate-variable": true,
     "no-unused-variable": [
       true
