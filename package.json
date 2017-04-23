@@ -1,13 +1,10 @@
 {
-  "name": "ionic-hello-world",
-  "author": "Ionic Framework",
-  "homepage": "http://ionicframework.com/",
-  "private": true,
+  "name": "BadApp",
+  "author": "IEEE NU",
   "scripts": {
-    "clean": "ionic-app-scripts clean",
-    "build": "ionic-app-scripts build",
-    "ionic:build": "ionic-app-scripts build",
-    "ionic:serve": "ionic-app-scripts serve"
+    "start": "ng serve",
+    "build": "ng build",
+    "lint": "ng lint"
   },
   "dependencies": {
     "@angular/common": "4.0.0",
@@ -16,41 +13,22 @@
     "@angular/core": "4.0.0",
     "@angular/forms": "4.0.0",
     "@angular/http": "4.0.0",
+    "@angular/material": "^2.0.0-beta.3",
     "@angular/platform-browser": "4.0.0",
     "@angular/platform-browser-dynamic": "4.0.0",
-    "@ionic-native/core": "3.4.2",
-    "@ionic-native/facebook": "^3.4.4",
-    "@ionic-native/splash-screen": "3.4.2",
-    "@ionic-native/status-bar": "3.4.2",
-    "@ionic/storage": "2.0.1",
+    "@angular/router": "^4.0.0",
     "angularfire2": "^2.0.0-beta.8",
     "firebase": "^3.7.5",
-    "ionic-angular": "3.0.1",
-    "ionic-native": "^2.9.0",
-    "ionicons": "3.0.0",
+    "hammerjs": "^2.0.8",
     "rxjs": "5.1.1",
-    "sw-toolbox": "3.4.0",
-    "zone.js": "^0.8.4"
+    "zone.js": "0.8.5"
   },
   "devDependencies": {
-    "@ionic/app-scripts": "1.3.0",
+    "@angular/cli": "1.0.0",
+    "@types/hammerjs": "^2.0.34",
+    "node-sass": "^4.5.2",
+    "tslint": "~4.5.0",
     "typescript": "~2.2.1"
   },
-  "cordovaPlugins": [
-    "cordova-plugin-whitelist",
-    "cordova-plugin-statusbar",
-    "cordova-plugin-console",
-    "cordova-plugin-device",
-    "cordova-plugin-splashscreen",
-    "ionic-plugin-keyboard"
-  ],
-  "cordovaPlatforms": [
-    "ios",
-    {
-      "platform": "ios",
-      "version": "",
-      "locator": "ios"
-    }
-  ],
-  "description": "BadApp: An Ionic project"
+  "description": "BadApp"
 }

@@ -1,14 +1,16 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-import { SplashScreen } from '@ionic-native/splash-screen';
-import { StatusBar } from '@ionic-native/status-bar';
+import { BrowserModule } from '@angular/platform-browser';
 
-import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
+import { AppComponent } from './app.component';
+import { HomePage } from './home/home.component';
 
-import { AngularFireModule } from 'angularfire2';
+import {
+  AngularFireModule,
+  AuthMethods,
+  AuthProviders
+} from 'angularfire2';
 import { AuthService } from '../providers/auth-service';
+import 'hammerjs';
 
 // import { ReversePipe } from '../pipes/reverse.pipe';
 
@@ -21,27 +23,25 @@ export const firebaseConfig = {
   messagingSenderId: "336287708104"
 };
 
+const firebaseAuthConfig = {
+  provider: AuthProviders.Facebook,
+  method: AuthMethods.Redirect
+}
+
 @NgModule({
-  declarations: [
-    MyApp,
-    HomePage,
-    // ReversePipe
-  ],
   imports: [
     BrowserModule,
-    AngularFireModule.initializeApp(firebaseConfig),
-    IonicModule.forRoot(MyApp),
+    AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig)
   ],
-  bootstrap: [IonicApp],
-  entryComponents: [
-    MyApp,
-    HomePage
+  declarations: [
+    HomePage,
+    AppComponent
+    // ReversePipe
   ],
   providers: [
-    StatusBar,
-    SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AuthService,
-  ]
+    AuthService
+  ],
+  exports: [AppComponent],
+  bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

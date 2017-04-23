@@ -1,6 +1,11 @@
 # Specifies intentionally untracked files to ignore when using Git
 # http://git-scm.com/docs/gitignore
 
+# compiled output
+/dist
+/tmp
+/out-tsc
+
 *~
 *.sw[mnpcod]
 *.log
@@ -12,14 +17,28 @@ log.txt
 .vscode/
 npm-debug.log*
 
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
 .idea/
 .sass-cache/
 .tmp/
 .versions/
 coverage/
-dist/
 node_modules/
-tmp/
 temp/
 hooks/
 platforms/
@@ -29,6 +48,7 @@ plugins/ios.json
 www/
 $RECYCLE.BIN/
 
+# System Files
 .DS_Store
 Thumbs.db
 UserInterfaceState.xcuserstate

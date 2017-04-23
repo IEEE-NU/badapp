@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
 
 import { AuthService } from '../../providers/auth-service';
 import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
@@ -8,7 +7,7 @@ import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'a
 
 @Component({
   selector: 'page-home',
-  templateUrl: 'home.html',
+  templateUrl: 'home.component.html',
   // providers: [ReversePipe]
 })
 export class HomePage {
@@ -17,7 +16,7 @@ export class HomePage {
   id: string;
   name: string;
   authenticated: boolean = false;
-  constructor(public navCtrl: NavController, public af: AngularFire, private _auth: AuthService) {
+  constructor(public af: AngularFire, private _auth: AuthService) {
     this.leaderboard = af.database.list('/users', {
       query: {
         orderByChild: 'score',
@@ -44,7 +43,7 @@ export class HomePage {
     });
   }
 
-  private addNewUser(users, uid, name) {
+  private addNewUser(users: FirebaseObjectObservable<any>, uid: string, name: string) {
     users.set({ [this.id]: { score: 0, name: name } });
   }
 
