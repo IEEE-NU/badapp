@@ -10,8 +10,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AppComponent } from './app.component';
 import { HomePage } from './home/home.component';
 import { LoginComponent } from './login/login.component';
-
-// import { ReversePipe } from '../pipes/reverse.pipe';
+import { AuthGuard } from "./auth-guard.service";
 
 export const firebaseConfig = {
   apiKey: "AIzaSyA-qxU8pP8stbuuncVG4j_iSPfPvQl6GD0",
@@ -23,8 +22,12 @@ export const firebaseConfig = {
 };
 
 const routes: Routes = [
-  { path: 'home', component: HomePage },
-  { path: 'login', component: LoginComponent }
+  { path: 'login', component: LoginComponent },
+  {
+    path: 'home',
+    component: HomePage,
+    canActivate: [AuthGuard]
+  }
 ];
 
 @NgModule({
@@ -38,10 +41,9 @@ const routes: Routes = [
     HomePage,
     AppComponent,
     LoginComponent
-    // ReversePipe
   ],
   providers: [
-    AuthService
+    AuthService, AuthGuard
   ],
   exports: [AppComponent, UiModule, RouterModule],
   bootstrap: [AppComponent]

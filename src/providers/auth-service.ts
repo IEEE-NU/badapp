@@ -7,6 +7,7 @@ export class AuthService {
   private authState: FirebaseAuthState;
 
   constructor(public auth$: AngularFireAuth) {
+    console.log("AuthService: constructed");
     auth$.subscribe((state: FirebaseAuthState) => {
       this.authState = state;
     });
@@ -39,24 +40,24 @@ export class AuthService {
   signInWithFacebook(): firebase.Promise<FirebaseAuthState> {
     return this.auth$.login({
       provider: AuthProviders.Facebook,
-      method: AuthMethods.Redirect
+      method: AuthMethods.Popup
     });
   }
 
   signInWithGoogle(): firebase.Promise<FirebaseAuthState> {
     return this.auth$.login({
       provider: AuthProviders.Google,
-      method: AuthMethods.Redirect
+      method: AuthMethods.Popup
     });
   }
 
-  signOut(): void {
-    this.auth$.logout();
+  signOut(): firebase.Promise<void> {
+    return this.auth$.logout();
   }
 
   getUID(): string {
     if (this.authenticated) {
-      return this.authState.facebook.uid;
+      return this.authState.auth.uid;
     } else {
       return '';
     }
@@ -64,7 +65,7 @@ export class AuthService {
 
   getDisplayName(): string {
     if (this.authenticated) {
-      return this.authState.facebook.displayName;
+      return this.authState.auth.displayName;
     } else {
       return '';
     }
