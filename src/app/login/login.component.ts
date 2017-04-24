@@ -1,23 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from "../../providers/auth-service";
 import { Router } from "@angular/router";
-import { FirebaseAuthState } from "angularfire2";
 
 @Component({
   selector: 'page-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   constructor(private _auth: AuthService, private _router: Router) { }
-
-  ngOnInit() {
-    this._auth.subscribe((state: FirebaseAuthState) => {
-      if (state != null) {
-        this.onSignInSuccess();
-      }
-    });
-  }
 
   signInWithFacebook(): void {
     this._auth.signInWithFacebook().then(this.onSignInSuccess);

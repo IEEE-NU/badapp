@@ -20,6 +20,22 @@ export class AuthService {
     this.auth$.subscribe(callback);
   }
 
+  subscribeLogin(callback: () => void): void {
+    this.auth$.subscribe((state: FirebaseAuthState) => {
+      if (state != null) {
+        callback();
+      }
+    });
+  }
+
+  subscribeLogout(callback: () => void): void {
+    this.auth$.subscribe((state: FirebaseAuthState) => {
+      if (state == null) {
+        callback();
+      }
+    });
+  }
+
   signInWithFacebook(): firebase.Promise<FirebaseAuthState> {
     return this.auth$.login({
       provider: AuthProviders.Facebook,

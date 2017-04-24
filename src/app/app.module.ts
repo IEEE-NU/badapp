@@ -24,7 +24,7 @@ export const firebaseConfig = {
 
 const routes: Routes = [
   { path: 'home', component: HomePage },
-  { path: '', component: LoginComponent }
+  { path: 'login', component: LoginComponent }
 ];
 
 @NgModule({

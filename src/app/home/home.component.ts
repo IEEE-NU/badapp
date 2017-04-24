@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { AuthService } from '../../providers/auth-service';
 import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
@@ -10,28 +10,24 @@ import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'a
   templateUrl: 'home.component.html',
   // providers: [ReversePipe]
 })
-export class HomePage {
+export class HomePage implements OnInit {
   user: FirebaseObjectObservable<any>;
   leaderboard: FirebaseListObservable<any>;
   id: string;
   name: string;
-  authenticated: boolean = false;
-  constructor(public af: AngularFire, private _auth: AuthService) {
-    this.leaderboard = af.database.list('/users', {
+  constructor(public af: AngularFire, private _auth: AuthService) { }
+
+  ngOnInit(): void {
+    this.leaderboard = this.af.database.list('/users', {
       query: {
         orderByChild: 'score',
         limitToLast: 5
       }
     });
+    this._auth.subscribeLogin(() => this.loadUserData());
   }
 
-  signInWithFacebook(): void {
-    this._auth.signInWithFacebook()
-      .then(() => this.onSignInSuccess());
-  }
-
-  private onSignInSuccess(): void {
-    this.authenticated = true;
+  private loadUserData(): void {
     this.id = this._auth.getUID();
     this.name = this._auth.getDisplayName();
     this.user = this.af.database.object('users/' + this.id);
