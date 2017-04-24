@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFireAuth, FirebaseAuthState } from 'angularfire2';
+import { AngularFireAuth, FirebaseAuthState, AuthProviders, AuthMethods } from 'angularfire2';
 import firebase from 'firebase';
 
 @Injectable()
@@ -13,11 +13,25 @@ export class AuthService {
   }
 
   get authenticated(): boolean {
-    return this.authState !== null;
+    return this.authState != null;
+  }
+
+  subscribe(callback: (state: FirebaseAuthState) => void): void {
+    this.auth$.subscribe(callback);
   }
 
   signInWithFacebook(): firebase.Promise<FirebaseAuthState> {
-    return this.auth$.login();
+    return this.auth$.login({
+      provider: AuthProviders.Facebook,
+      method: AuthMethods.Redirect
+    });
+  }
+
+  signInWithGoogle(): firebase.Promise<FirebaseAuthState> {
+    return this.auth$.login({
+      provider: AuthProviders.Google,
+      method: AuthMethods.Redirect
+    });
   }
 
   signOut(): void {

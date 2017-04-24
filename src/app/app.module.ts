@@ -1,17 +1,15 @@
 import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
-import { MaterialModule } from './material.module';
+import { UiModule } from './ui/ui.module';
+
+import { AuthService } from '../providers/auth-service';
+
+import { AngularFireModule } from 'angularfire2';
 
 import { AppComponent } from './app.component';
 import { HomePage } from './home/home.component';
-
-import {
-  AngularFireModule,
-  AuthMethods,
-  AuthProviders
-} from 'angularfire2';
-import { AuthService } from '../providers/auth-service';
-import 'hammerjs';
+import { LoginComponent } from './login/login.component';
 
 // import { ReversePipe } from '../pipes/reverse.pipe';
 
@@ -24,26 +22,28 @@ export const firebaseConfig = {
   messagingSenderId: "336287708104"
 };
 
-const firebaseAuthConfig = {
-  provider: AuthProviders.Facebook,
-  method: AuthMethods.Redirect
-};
+const routes: Routes = [
+  { path: 'home', component: HomePage },
+  { path: '', component: LoginComponent }
+];
 
 @NgModule({
   imports: [
     BrowserModule,
-    MaterialModule,
-    AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig)
+    UiModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    RouterModule.forRoot(routes)
   ],
   declarations: [
     HomePage,
-    AppComponent
+    AppComponent,
+    LoginComponent
     // ReversePipe
   ],
   providers: [
     AuthService
   ],
-  exports: [AppComponent, MaterialModule],
+  exports: [AppComponent, UiModule, RouterModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
