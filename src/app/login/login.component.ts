@@ -11,14 +11,15 @@ export class LoginComponent {
   constructor(private _auth: AuthService, private _router: Router) { }
 
   signInWithFacebook(): void {
-    this._auth.signInWithFacebook().then(this.onSignInSuccess);
+    this._auth.signInWithFacebook().then(() => this.onSignInSuccess());
   }
 
   signInWithGoogle(): void {
-    this._auth.signInWithGoogle().then(this.onSignInSuccess);
+    this._auth.signInWithGoogle().then(() => this.onSignInSuccess());
   }
 
   private onSignInSuccess(): void {
+    console.log("LoginComponent: login success, redirection to home")
     this._router.navigate(['/home']);
   }
 }

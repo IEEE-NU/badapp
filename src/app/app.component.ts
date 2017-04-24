@@ -15,8 +15,10 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this._auth.subscribe((state: FirebaseAuthState) => {
       if (state != null) {
+        console.log("AppComponent: redirecting to home");
         this._router.navigate(['/home']);
       } else {
+        console.log("AppComponent: redirecting to login");
         this._router.navigate(['/login']);
       }
     });

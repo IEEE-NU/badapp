@@ -1,3 +1,24 @@
+@import '~@angular/material/theming';
+@import '../../mat-theme-colors';
+
 #page-login {
     height: 100%;
+}
+
+#login-card {
+    padding: 0;
+}
+
+#login-card > .mat-card-header {
+    padding: 24px 24px 0;
+    color: white;
+    background: mat-color($bad-app-primary);
+}
+
+#login-card .mat-card-title {
+    font-size: 2em;
+}
+
+#login-card > .mat-card-content {
+    padding: 12px 24px 24px;
 }

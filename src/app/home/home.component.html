@@ -1,14 +1,23 @@
-<div class="half-center">
-	<div class="text-center">
-		<h1>{{ (user | async)?.score }}</h1>
-		<button md-raised-button (tap)="incrementScore()">+1</button>
+<md-toolbar color="primary">
+	<span>BadApp</span>
+	<div class="flex-spacer"></div>
+	<button md-button (click)="signOut()">Sign out</button>
+</md-toolbar>
+
+<div style="position: relative">
+	<div id="leaderboard">
+		<h3>Top 5 Leaderboard</h3>
+		<ol>
+			<li class="text" *ngFor="let user of leaderboard | async | reverse">
+				{{user.name}}: {{user.score}}
+			</li>
+		</ol>
 	</div>
-</div>
-<div class="half-center">
-	<h2>Top 5 Leaderboard</h2>
-	<ul>
-		<li class="text" *ngFor="let user of leaderboard | async">
-			{{user.name}}: {{user.score}}
-		</li>
-	</ul>
+
+	<div class="half-center">
+		<div class="text-center">
+			<h1>{{ (user | async)?.score }}</h1>
+			<button md-raised-button (click)="incrementScore()">+1</button>
+		</div>
+	</div>
 </div>

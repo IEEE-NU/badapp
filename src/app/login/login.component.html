@@ -1,11 +1,12 @@
 <div id="page-login" fxLayout="column" fxLayoutAlign="center center">
-  <md-card>
+  <md-card id="login-card">
     <md-card-header>
-      <h1>Are you the baddest?</h1>
+      <md-card-title>Are you the baddest?</md-card-title>
     </md-card-header>
     <md-card-content>
-      <button md-raised-button (tap)="signInWithFacebook()">Facebook Sign-in</button>
-      <button md-raised-button (tap)="signInWithGoogle()">Google Sign-in</button>
+      <p>(Enable third-party cookies in your browser to login)</p>
+      <button md-raised-button (click)="signInWithFacebook()">Facebook Sign-in</button>
+      <button md-raised-button (click)="signInWithGoogle()">Google Sign-in</button>
     </md-card-content>
   </md-card>
 </div>

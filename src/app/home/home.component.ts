@@ -1,21 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router } from "@angular/router";
+
+import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
+import { Subscription } from "rxjs/Subscription";
 
 import { AuthService } from '../../providers/auth-service';
-import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
-
-// import { ReversePipe } from '../../pipes/reverse.pipe';
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.component.html',
-  // providers: [ReversePipe]
+  styleUrls: ['./home.component.scss']
 })
-export class HomePage implements OnInit {
+export class HomePage implements OnInit, OnDestroy {
   user: FirebaseObjectObservable<any>;
+  userSubscription: Subscription;
   leaderboard: FirebaseListObservable<any>;
   id: string;
   name: string;
-  constructor(public af: AngularFire, private _auth: AuthService) { }
+  constructor(public af: AngularFire, private _auth: AuthService, private _router: Router) {
+    console.log("HomePage: constructor");
+  }
 
   ngOnInit(): void {
     this.leaderboard = this.af.database.list('/users', {
@@ -24,23 +28,35 @@ export class HomePage implements OnInit {
         limitToLast: 5
       }
     });
-    this._auth.subscribeLogin(() => this.loadUserData());
+    if (this._auth.authenticated) {
+      this.loadUserData();
+    } else {
+      this._auth.subscribeLogin(() => this.loadUserData());
+    }
+  }
+
+  ngOnDestroy(): void {
+    console.log("HomePage: onDestory");
+    this.userSubscription.unsubscribe();
+  }
+
+  signOut(): void {
+    this._auth.signOut();
   }
 
   private loadUserData(): void {
     this.id = this._auth.getUID();
     this.name = this._auth.getDisplayName();
     this.user = this.af.database.object('users/' + this.id);
-    this.user.subscribe((obj) => {
+    this.userSubscription = this.user.subscribe((obj) => {
       if (!obj.$exists()) {
-        var allUsers = this.af.database.object('users/');
-        this.addNewUser(allUsers, this.id, this.name);
+        this.addNewUser(this.id, this.name);
       }
     });
   }
 
-  private addNewUser(users: FirebaseObjectObservable<any>, uid: string, name: string) {
-    users.set({ [this.id]: { score: 0, name: name } });
+  private addNewUser(uid: string, name: string) {
+    this.af.database.object('users/').update({ [this.id]: { score: 0, name: name } });
   }
 
   incrementScore() {
