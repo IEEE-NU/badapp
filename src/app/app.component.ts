@@ -3,7 +3,7 @@ import { Router } from "@angular/router";
 import { MdIconRegistry } from "@angular/material";
 import { FirebaseAuthState } from "angularfire2";
 
-import { AuthService } from "../providers/auth-service";
+import { AuthService } from "../services/auth.service";
 
 @Component({
   selector: 'bad-app',

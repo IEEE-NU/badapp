@@ -5,20 +5,13 @@
 		<button md-button (click)="signOut()">Sign out</button>
 	</md-toolbar>
 
-	<div fxFill fxLayout="row">
-		<div class="side-panel" id="leaderboard">
-			<h2>Opponenuggets</h2>
-			<md-list>
-				<md-divider></md-divider>
-				<player-card *ngFor="let player of leaderboard | async | orderBy: '-nuggets'; trackBy: playerTrackBy" [player]="player" [canAttack]="user?.id != player.id"
-				 (onAttack)="attack($event)"></player-card>
-			</md-list>
-		</div>
+	<div fxLayout="row">
+		<leaderboard-panel></leaderboard-panel>
 
 		<div class="half-center" fxFlex="1 1 auto">
 			<div class="text-center">
-				<h1>{{ user?.nuggets }}</h1>
-				<button md-raised-button (click)="generateNuggetsClick()">+1</button>
+				<h1>{{ _gameState.user?.nuggets }}</h1>
+				<button md-raised-button (click)="_gameState.generateNuggetsClick()">+1</button>
 			</div>
 		</div>
 

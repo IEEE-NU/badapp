@@ -11,15 +11,21 @@ export class PlayerCardComponent implements OnInit {
   @Input() player: Player;
   @Input() canAttack: boolean;
   @Output() onAttack = new EventEmitter<Player>();
-  @ViewChild(MdButton) attackButton: MdButton;
+  @Output() onHelp = new EventEmitter<Player>();
+  @ViewChild("attack") attackButton: MdButton;
+  @ViewChild("help") helpButton: MdButton;
   constructor() { }
 
   ngOnInit() {
-    console.log(this.canAttack);
     this.attackButton.disabled = !this.canAttack;
+    this.helpButton.disabled = !this.canAttack;
   }
 
   attackPlayer() {
     this.onAttack.emit(this.player);
+  }
+
+  helpPlayer() {
+    this.onHelp.emit(this.player);
   }
 }

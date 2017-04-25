@@ -1,4 +1,5 @@
 #home-container {
+	position: relative;
 	height: 100vh;
 }
 
@@ -14,18 +15,14 @@
 	text-align: center;
 }
 
+#upgrades {
+	box-shadow: -3px 0 6px rgba(0,0,0,.24);
+}
+
 .side-panel {
 	min-width: 300px;
 }
 
 .side-panel > h2 {
 	margin-left: 12px;
-}
-
-#leaderboard {
-	box-shadow: 3px 0 6px rgba(0,0,0,.24);
-}
-
-#upgrades {
-	box-shadow: -3px 0 6px rgba(0,0,0,.24);
 }

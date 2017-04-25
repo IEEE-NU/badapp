@@ -4,6 +4,7 @@
     <span md-line>{{ player.title }}</span>
     <span md-line>Nuggets: {{ player.nuggets }}</span>
     <span md-line>Score: {{ player.nuggets }}</span>
-    <button md-mini-fab (click)="attackPlayer()"><md-icon fontIcon="game-icon-crossed-swords"></md-icon></button>
+    <button #help id="help" md-mini-fab (click)="helpPlayer()"><md-icon fontIcon="game-icon-heart-plus"></md-icon></button>
+    <button #attack md-mini-fab (click)="attackPlayer()"><md-icon fontIcon="game-icon-crossed-swords"></md-icon></button>
 </md-list-item>
 <md-divider></md-divider>
