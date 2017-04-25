@@ -14,18 +14,18 @@
 	text-align: center;
 }
 
-.flex-spacer {
-  flex: 1 1 auto;
+.side-panel {
+	min-width: 300px;
+}
+
+.side-panel > h2 {
+	margin-left: 12px;
 }
 
 #leaderboard {
-	position: absolute;
-	top: 0;
-	left: 0;
-	height: 100%;
 	box-shadow: 3px 0 6px rgba(0,0,0,.24);
 }
 
-#leaderboard > h2 {
-	margin-left: 12px;
+#upgrades {
+	box-shadow: -3px 0 6px rgba(0,0,0,.24);
 }

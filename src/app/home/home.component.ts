@@ -13,9 +13,11 @@ import { Player } from "../../classes";
   styleUrls: ['./home.component.scss']
 })
 export class HomePage implements OnInit, OnDestroy {
-  user: FirebaseObjectObservable<any>;
+  user: Player;
+  userRef: FirebaseObjectObservable<any>;
   userSubscription: Subscription;
   leaderboard: FirebaseListObservable<any>;
+  canAttack: boolean = true;
   constructor(public af: AngularFire, private _auth: AuthService, private _router: Router) {
     console.log("HomePage: constructor");
   }
@@ -44,8 +46,9 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
   private loadUserData(): void {
-    this.user = this.af.database.object('users/' + this._auth.getUID());
-    this.userSubscription = this.user.subscribe((obj) => {
+    this.userRef = this.af.database.object('users/' + this._auth.getUID());
+    this.userSubscription = this.userRef.subscribe(obj => {
+      this.user = obj;
       if (!obj.$exists()) {
         this.addNewUser(this._auth.getUser());
       }
@@ -65,7 +68,7 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
   generateNuggetsClick() {
-    this.user.$ref.transaction(user => {
+    this.userRef.$ref.transaction(user => {
       user.nuggets++;
       return user;
     });

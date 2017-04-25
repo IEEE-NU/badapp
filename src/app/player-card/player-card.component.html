@@ -1,6 +1,7 @@
 <md-list-item>
     <img md-list-avatar class="player-image" src="{{ player.photo || '' }}" />
-    <h3 md-line>{{ player.name }} - {{ player.title }}</h3>
+    <h3 md-line>{{ player.name }}</h3>
+    <span md-line>{{ player.title }}</span>
     <span md-line>Nuggets: {{ player.nuggets }}</span>
     <span md-line>Score: {{ player.nuggets }}</span>
     <button md-mini-fab (click)="attackPlayer()"><md-icon fontIcon="game-icon-crossed-swords"></md-icon></button>
