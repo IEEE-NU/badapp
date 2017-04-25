@@ -21,7 +21,12 @@
         "mat-theme.scss",
         "styles.scss"
       ],
-      "scripts": []
+      "scripts": [],
+      "environmentSource": "environments/environment.ts",
+      "environments": {
+        "dev": "environments/environment.ts",
+        "prod": "environments/environment.prod.ts"
+      }
     }
   ],
   "lint": [
