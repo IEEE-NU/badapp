@@ -55,6 +55,14 @@ export class AuthService {
     return this.auth$.logout();
   }
 
+  getUser(): firebase.User | null {
+    if (this.authenticated) {
+      return this.authState.auth;
+    } else {
+      return null;
+    }
+  }
+
   getUID(): string {
     if (this.authenticated) {
       return this.authState.auth.uid;

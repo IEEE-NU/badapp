@@ -1,23 +1,24 @@
-<md-toolbar color="primary">
-	<span>BadApp</span>
-	<div class="flex-spacer"></div>
-	<button md-button (click)="signOut()">Sign out</button>
-</md-toolbar>
+<div id="home-container" fxLayout="column">
+	<md-toolbar color="primary">
+		<span>BadApp</span>
+		<div class="flex-spacer"></div>
+		<button md-button (click)="signOut()">Sign out</button>
+	</md-toolbar>
 
-<div style="position: relative">
-	<div id="leaderboard">
-		<h3>Top 5 Leaderboard</h3>
-		<ol>
-			<li class="text" *ngFor="let user of leaderboard | async | reverse">
-				{{user.name}}: {{user.score}}
-			</li>
-		</ol>
-	</div>
+	<div style="position: relative" fxFill>
+		<div id="leaderboard">
+			<h2>Opponenuggets</h2>
+			<md-list>
+				<md-divider></md-divider>
+				<player-card *ngFor="let player of leaderboard | async | reverse; trackBy: playerTrackBy" [player]="player" (onAttack)="attack($event)"></player-card>
+			</md-list>
+		</div>
 
-	<div class="half-center">
-		<div class="text-center">
-			<h1>{{ (user | async)?.score }}</h1>
-			<button md-raised-button (click)="incrementScore()">+1</button>
+		<div class="half-center">
+			<div class="text-center">
+				<h1>{{ (user | async)?.nuggets }}</h1>
+				<button md-raised-button (click)="generateNuggetsClick()">+1</button>
+			</div>
 		</div>
 	</div>
 </div>

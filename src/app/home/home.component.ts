@@ -5,6 +5,7 @@ import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'a
 import { Subscription } from "rxjs/Subscription";
 
 import { AuthService } from '../../providers/auth-service';
+import { Player } from "../../classes";
 
 @Component({
   selector: 'page-home',
@@ -15,8 +16,6 @@ export class HomePage implements OnInit, OnDestroy {
   user: FirebaseObjectObservable<any>;
   userSubscription: Subscription;
   leaderboard: FirebaseListObservable<any>;
-  id: string;
-  name: string;
   constructor(public af: AngularFire, private _auth: AuthService, private _router: Router) {
     console.log("HomePage: constructor");
   }
@@ -25,7 +24,7 @@ export class HomePage implements OnInit, OnDestroy {
     this.leaderboard = this.af.database.list('/users', {
       query: {
         orderByChild: 'score',
-        limitToLast: 5
+        limitToLast: 20
       }
     });
     if (this._auth.authenticated) {
@@ -45,24 +44,35 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
   private loadUserData(): void {
-    this.id = this._auth.getUID();
-    this.name = this._auth.getDisplayName();
-    this.user = this.af.database.object('users/' + this.id);
+    this.user = this.af.database.object('users/' + this._auth.getUID());
     this.userSubscription = this.user.subscribe((obj) => {
       if (!obj.$exists()) {
-        this.addNewUser(this.id, this.name);
+        this.addNewUser(this._auth.getUser());
       }
     });
   }
 
-  private addNewUser(uid: string, name: string) {
-    this.af.database.object('users/').update({ [this.id]: { score: 0, name: name } });
+  private addNewUser(user: firebase.User) {
+    this.af.database.object('users/').update(
+      {
+        [user.uid]: new Player(user.uid, user.displayName, 0, user.photoURL, "Noob nugget")
+      }
+    );
   }
 
-  incrementScore() {
+  playerTrackBy(index: number, player: Player) {
+    return player.id;
+  }
+
+  generateNuggetsClick() {
     this.user.$ref.transaction(user => {
-      user.score++;
+      user.nuggets++;
       return user;
     });
+  }
+
+  attack(player: Player) {
+    this.af.database.object('users/' + player.id).$ref
+      .transaction(user => { user.nuggets--; return user; });
   }
 }

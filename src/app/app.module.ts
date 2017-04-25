@@ -1,16 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
-import { UiModule } from './ui/ui.module';
-
-import { AuthService } from '../providers/auth-service';
-
 import { AngularFireModule } from 'angularfire2';
+
+import { UiModule } from './ui/ui.module';
 
 import { AppComponent } from './app.component';
 import { HomePage } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { PlayerCardComponent } from './player-card/player-card.component';
+
+import { MdIconRegistry } from "@angular/material";
 import { AuthGuard } from "./auth-guard.service";
+import { AuthService } from '../providers/auth-service';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyA-qxU8pP8stbuuncVG4j_iSPfPvQl6GD0",
@@ -40,10 +42,11 @@ const routes: Routes = [
   declarations: [
     HomePage,
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    PlayerCardComponent
   ],
   providers: [
-    AuthService, AuthGuard
+    AuthService, AuthGuard, MdIconRegistry
   ],
   exports: [AppComponent, UiModule, RouterModule],
   bootstrap: [AppComponent]
