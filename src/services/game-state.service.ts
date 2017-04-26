@@ -10,6 +10,7 @@ export class GameStateService {
   public user: Player;
   public userRef: FirebaseObjectObservable<any>;
   public userSubscription: Subscription;
+  private userIsBot: boolean;
   constructor(private af: AngularFire, private _auth: AuthService) {
     console.log("GameStateService: constructor");
     console.log("GameStateService: onInit");
@@ -28,6 +29,7 @@ export class GameStateService {
         this.addNewUser(this._auth.getUser());
       }
     });
+    setTimeout(() => this.userIsBot = this.isBot(), 5000);
   }
 
   private addNewUser(user: firebase.User) {
@@ -39,6 +41,7 @@ export class GameStateService {
   }
 
   generateNuggetsClick() {
+    if (this.userIsBot) return;
     this.userRef.$ref.transaction(user => {
       user.nuggets++;
       return user;
@@ -46,12 +49,26 @@ export class GameStateService {
   }
 
   attack(player: Player) {
+    if (this.userIsBot) return;
     this.af.database.object('users/' + player.id).$ref
       .transaction(user => { user.nuggets--; return user; });
   }
 
   help(player: Player) {
+    if (this.userIsBot) return;
     this.af.database.object('users/' + player.id).$ref
       .transaction(user => { user.nuggets++; return user; });
+  }
+
+  private isBot(): boolean {
+    if ('$cdc_asdjflasutopfhvcZLmcfl_' in document
+      || '$wdc_' in document
+      || "__webdriver_script_fn" in document
+      || "_Selenium_IDE_Recorder" in window
+      || window.document.documentElement.getAttribute("webdriver")) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
