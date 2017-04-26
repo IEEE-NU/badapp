@@ -14,6 +14,8 @@ import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 
 import { AuthGuard } from "../services/auth-guard.service";
 import { AuthService } from "../services/auth.service";
+import { CommandComponent } from './command/command.component';
+import { UpgradeComponent } from './upgrade/upgrade.component';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyA-qxU8pP8stbuuncVG4j_iSPfPvQl6GD0",
@@ -29,7 +31,22 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomePage,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: '',
+        redirectTo: 'command',
+        pathMatch: 'full'
+      },
+      {
+        path: 'command',
+        component: CommandComponent
+      },
+      {
+        path: 'upgrade',
+        component: UpgradeComponent
+      }
+    ]
   }
 ];
 
@@ -45,7 +62,9 @@ const routes: Routes = [
     AppComponent,
     LoginComponent,
     PlayerCardComponent,
-    LeaderboardComponent
+    LeaderboardComponent,
+    CommandComponent,
+    UpgradeComponent
   ],
   providers: [
     AuthService, AuthGuard, MdIconRegistry

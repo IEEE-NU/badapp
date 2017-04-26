@@ -1,0 +1,11 @@
+<md-grid-list id="command" cols="3" rowHeight="fit">
+  <md-grid-tile>
+    <img id="generate_nuggets" src="assets/nugget_bucket.png" (click)="_gameState.generateNuggetsClick()" />
+    <md-grid-tile-footer>
+      <h1 id="nugget_count">{{ _gameState.user?.nuggets }}</h1>
+    </md-grid-tile-footer>
+  </md-grid-tile>
+  <md-grid-tile colspan="2"></md-grid-tile>
+  <md-grid-tile colspan="3"></md-grid-tile>
+  <md-grid-tile colspan="3"></md-grid-tile>
+</md-grid-list>

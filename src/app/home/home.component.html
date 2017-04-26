@@ -1,30 +1,27 @@
-<div id="home-container" fxLayout="column">
+<div id="home-container"
+     fxLayout="column">
 	<md-toolbar color="primary">
 		<span>BadApp</span>
 		<div fxFlex="1 1 auto"></div>
-		<button md-button (click)="signOut()">Sign out</button>
+		<button md-button
+		        (click)="signOut()">Sign out</button>
 	</md-toolbar>
 
 	<div fxLayout="row">
 		<leaderboard-panel></leaderboard-panel>
 
-		<md-grid-list fxFlex="1 1 auto" cols="3" rowHeight="fit">
-			<md-grid-tile>
-				<img id="generate_nuggets" src="assets/nugget_bucket.png" (click)="_gameState.generateNuggetsClick()" />
-				<md-grid-tile-footer>
-					<h1 id="nugget_count">{{ _gameState.user?.nuggets }}</h1>
-				</md-grid-tile-footer>
-			</md-grid-tile>
-			<md-grid-tile colspan="2"></md-grid-tile>
-			<md-grid-tile colspan="3"></md-grid-tile>
-			<md-grid-tile colspan="3"></md-grid-tile>
-		</md-grid-list>
-
-		<div class="side-panel" id="upgrades">
-			<h2>Upnuggets</h2>
-			<md-list>
-				<md-divider></md-divider>
-			</md-list>
+		<div fxLayout="column"
+		     fxFlex>
+			<nav md-tab-nav-bar>
+				<a md-tab-link
+				   *ngFor="let tabLink of tabLinks; let i = index"
+				   [routerLink]="tabLink.link"
+				   [active]="activeTab === i"
+				   (click)="activeTab = i">
+      {{tabLink.label}}
+    </a>
+			</nav>
+			<router-outlet></router-outlet>
 		</div>
 	</div>
 </div>
