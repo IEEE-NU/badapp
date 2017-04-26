@@ -13,7 +13,7 @@ import { GameStateService } from "../../services/game-state.service";
   providers: [GameStateService]
 })
 export class HomePage implements OnInit, OnDestroy {
-  constructor(public af: AngularFire, private _auth: AuthService, private _router: Router, private _gameState: GameStateService) {
+  constructor(public af: AngularFire, private _auth: AuthService, private _router: Router, public _gameState: GameStateService) {
     console.log("HomePage: constructor");
   }
 

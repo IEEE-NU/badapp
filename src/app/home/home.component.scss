@@ -11,8 +11,22 @@
 	align-items: center;
 }
 
-.text-center {
+#nugget_count {
 	text-align: center;
+	font-size: 2em;
+}
+
+#generate_nuggets {
+	cursor: pointer;
+	transition: all .2s ease-in-out;
+}
+
+#generate_nuggets:hover {
+	transform: scale(1.05);
+}
+
+#generate_nuggets:active {
+	transform: scale(0.95);
 }
 
 #upgrades {

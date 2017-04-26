@@ -8,12 +8,17 @@
 	<div fxLayout="row">
 		<leaderboard-panel></leaderboard-panel>
 
-		<div class="half-center" fxFlex="1 1 auto">
-			<div class="text-center">
-				<h1>{{ _gameState.user?.nuggets }}</h1>
-				<button md-raised-button (click)="_gameState.generateNuggetsClick()">+1</button>
-			</div>
-		</div>
+		<md-grid-list fxFlex="1 1 auto" cols="3" rowHeight="fit">
+			<md-grid-tile>
+				<img id="generate_nuggets" src="assets/nugget_bucket.png" (click)="_gameState.generateNuggetsClick()" />
+				<md-grid-tile-footer>
+					<h1 id="nugget_count">{{ _gameState.user?.nuggets }}</h1>
+				</md-grid-tile-footer>
+			</md-grid-tile>
+			<md-grid-tile colspan="2"></md-grid-tile>
+			<md-grid-tile colspan="3"></md-grid-tile>
+			<md-grid-tile colspan="3"></md-grid-tile>
+		</md-grid-list>
 
 		<div class="side-panel" id="upgrades">
 			<h2>Upnuggets</h2>
