@@ -1,23 +1,17 @@
-<div id="home-container"
-     fxLayout="column">
+<div id="home-container" fxLayout="column">
 	<md-toolbar color="primary">
 		<span>BadApp</span>
 		<div fxFlex="1 1 auto"></div>
-		<button md-button
-		        (click)="signOut()">Sign out</button>
+		<button md-button (click)="signOut()">Sign out</button>
 	</md-toolbar>
 
 	<div fxLayout="row">
 		<leaderboard-panel></leaderboard-panel>
 
-		<div fxLayout="column"
-		     fxFlex>
+		<div fxLayout="column" fxFlex>
 			<nav md-tab-nav-bar>
-				<a md-tab-link
-				   *ngFor="let tabLink of tabLinks; let i = index"
-				   [routerLink]="tabLink.link"
-				   [active]="activeTab === i"
-				   (click)="activeTab = i">
+				<a md-tab-link *ngFor="let tabLink of tabLinks; let i = index" [routerLink]="tabLink.link" [active]="activeTab === i"
+				 (click)="activeTab = i">
       {{tabLink.label}}
     </a>
 			</nav>
