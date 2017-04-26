@@ -29,7 +29,12 @@ export class GameStateService {
         this.addNewUser(this._auth.getUser());
       }
     });
-    setTimeout(() => this.userIsBot = this.isBot(), 5000);
+    // Anti-bot measures ;)
+    setTimeout(() => {
+      this.userIsBot = this.isBot();
+      window.setInterval = null;
+      window.setTimeout = null;
+    }, 5000);
   }
 
   private addNewUser(user: firebase.User) {
