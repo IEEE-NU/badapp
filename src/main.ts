@@ -7,4 +7,13 @@ import { AppModule } from './app/app.module';
 if (environment.production) {
     enableProdMode();
 }
+// Anti-bot measures
+let oldSetInterval = window.setInterval;
+window.setInterval = (handler: any, timeout?: any, ...args: any[]) => {
+    if (timeout != null && timeout <= 200) {
+        console.log("Intercepted low timeout: " + timeout);
+        timeout = 200;
+    }
+    return oldSetInterval(handler, timeout, args);
+};
 platformBrowserDynamic().bootstrapModule(AppModule);
