@@ -30,11 +30,7 @@ export class GameStateService {
       }
     });
     // Anti-bot measures ;)
-    setTimeout(() => {
-      this.userIsBot = this.isBot();
-      window.setInterval = null;
-      window.setTimeout = null;
-    }, 5000);
+    setTimeout(() => this.userIsBot = this.isBot(), 5000);
   }
 
   private addNewUser(user: firebase.User) {
