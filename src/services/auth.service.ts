@@ -4,7 +4,7 @@ import firebase from 'firebase';
 
 @Injectable()
 export class AuthService {
-  private authState: FirebaseAuthState;
+  private authState: FirebaseAuthState = undefined;
 
   constructor(public auth$: AngularFireAuth) {
     console.log("AuthService: constructed");
@@ -17,8 +17,12 @@ export class AuthService {
     return this.authState != null;
   }
 
-  subscribe(callback: (state: FirebaseAuthState) => void): void {
-    this.auth$.subscribe(callback);
+  get hasAuthenticated(): boolean {
+    return this.authState !== undefined;
+  }
+
+  subscribe(callback: (state: FirebaseAuthState) => any): any {
+    return this.auth$.subscribe(callback);
   }
 
   subscribeLogin(callback: () => void): void {
