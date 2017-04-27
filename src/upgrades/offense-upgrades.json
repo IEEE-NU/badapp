@@ -1,0 +1,86 @@
+{
+  "o0": {
+    "base_cost": 100,
+    "description": "Increase attack power by 1",
+    "id": "o0",
+    "max": -1,
+    "name": "Attack upgrade 1",
+    "picture": "",
+    "scale_factor": 1.07,
+    "stat": "attack",
+    "stat_change": 1,
+    "type": "offense"
+  },
+  "o1": {
+    "base_cost": 100,
+    "description": "Increase attack power by 5",
+    "id": "o1",
+    "max": -1,
+    "name": "Attack upgrade 2",
+    "picture": "",
+    "scale_factor": 1.07,
+    "stat": "attack",
+    "stat_change": 5,
+    "type": "offense"
+  },
+  "o2": {
+    "base_cost": 100,
+    "description": "Increase attack power by 10",
+    "id": "o2",
+    "max": -1,
+    "name": "Attack upgrade 3",
+    "picture": "",
+    "scale_factor": 1.07,
+    "stat": "attack",
+    "stat_change": 10,
+    "type": "offense"
+  },
+  "o3": {
+    "base_cost": 100,
+    "description": "Increase attack power by 50",
+    "id": "o3",
+    "max": -1,
+    "name": "Attack upgrade 4",
+    "picture": "",
+    "scale_factor": 1.07,
+    "stat": "attack",
+    "stat_change": 50,
+    "type": "offense"
+  },
+  "o4": {
+    "base_cost": 100,
+    "description": "Increase attack power by 100",
+    "id": "o4",
+    "max": -1,
+    "name": "Attack upgrade 5",
+    "picture": "",
+    "scale_factor": 1.07,
+    "stat": "attack",
+    "stat_change": 100,
+    "type": "offense"
+  },
+  "o5": {
+    "base_cost": 100,
+    "description": "Deal 2% more damage per attack",
+    "id": "o5",
+    "max": -1,
+    "name": "Attack upgrade X",
+    "picture": "",
+    "scale_factor": 1.07,
+    "stat": "rel_attack",
+    "stat_change": 2,
+    "type": "offense"
+  },
+  "o6": {
+    "base_cost": 100,
+    "description": "Steal 1% more damage as nuggets",
+    "id": "o6",
+    "max": 50,
+    "name": "Attack upgrade Y",
+    "picture": "",
+    "scale_factor": 1.07,
+    "stat": "steal",
+    "stat_change": 1,
+    "type": "offense"
+  }
+}

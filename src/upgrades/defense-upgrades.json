@@ -1,0 +1,98 @@
+{
+  "d0": {
+    "base_cost": 100,
+    "description": "Block 1 damage from every attack",
+    "id": "d0",
+    "max": -1,
+    "name": "Absolute defense upgrade 1",
+    "picture": "",
+    "scale_factor": "1.07",
+    "stat": "abs_defense",
+    "stat_change": 1,
+    "type": "defense"
+  },
+  "d1": {
+    "base_cost": 100,
+    "description": "Block 5 damage from every attack",
+    "id": "d1",
+    "max": -1,
+    "name": "Absolute defense upgrade 2",
+    "picture": "",
+    "scale_factor": "1.07",
+    "stat": "abs_defense",
+    "stat_change": 5,
+    "type": "defense"
+  },
+  "d2": {
+    "base_cost": 100,
+    "description": "Block 10 damage from every attack",
+    "id": "d2",
+    "max": -1,
+    "name": "Absolute defense upgrade 3",
+    "picture": "",
+    "scale_factor": "1.07",
+    "stat": "abs_defense",
+    "stat_change": 1,
+    "type": "defense"
+  },
+  "d3": {
+    "base_cost": 100,
+    "description": "Block 100 damage from every attack",
+    "id": "d3",
+    "max": -1,
+    "name": "Absolute defense upgrade 4",
+    "picture": "",
+    "scale_factor": "1.07",
+    "stat": "abs_defense",
+    "stat_change": 1,
+    "type": "defense"
+  },
+  "d4": {
+    "base_cost": 100,
+    "description": "Block 1000 damage from every attack",
+    "id": "d4",
+    "max": -1,
+    "name": "Absolute defense upgrade 5",
+    "picture": "",
+    "scale_factor": "1.07",
+    "stat": "abs_defense",
+    "stat_change": 1,
+    "type": "defense"
+  },
+  "d5": {
+    "base_cost": 100,
+    "description": "Block 1% damage from every attack",
+    "id": "d5",
+    "max": -1,
+    "name": "Relative defense upgrade 1",
+    "picture": "",
+    "scale_factor": "1.07",
+    "stat": "rel_defense",
+    "stat_change": 1,
+    "type": "defense"
+  },
+  "d6": {
+    "base_cost": 100,
+    "description": "Block 5% damage from every attack",
+    "id": "d6",
+    "max": -1,
+    "name": "Relative defense upgrade 2",
+    "picture": "",
+    "scale_factor": "1.07",
+    "stat": "rel_defense",
+    "stat_change": 5,
+    "type": "defense"
+  },
+  "d7": {
+    "base_cost": 100,
+    "description": "Block 10% damage from every attack",
+    "id": "d7",
+    "max": -1,
+    "name": "Relative defense upgrade 3",
+    "picture": "",
+    "scale_factor": "1.07",
+    "stat": "rel_defense",
+    "stat_change": 1,
+    "type": "defense"
+  }
+}

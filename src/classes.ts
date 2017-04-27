@@ -13,3 +13,16 @@ export class Player {
         this.title = title;
     }
 }
+
+export class Upgrade {
+    id: string;
+    type: string;
+    name: string;
+    description: string;
+    picture: string;
+    base_cost: number;
+    scale_factor: number;
+    stat: string;
+    stat_change: number;
+    max: number;
+}
