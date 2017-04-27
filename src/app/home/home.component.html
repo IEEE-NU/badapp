@@ -10,8 +10,8 @@
 
 		<div fxLayout="column" fxFlex>
 			<nav md-tab-nav-bar>
-				<a md-tab-link *ngFor="let tabLink of tabLinks; let i = index" [routerLink]="tabLink.link" [active]="activeTab === i"
-				 (click)="activeTab = i">
+				<a md-tab-link *ngFor="let tabLink of tabLinks; let i = index" [routerLink]="tabLink.link" routerLinkActive
+				 #rla="routerLinkActive" [active]="rla.isActive">
       {{tabLink.label}}
     </a>
 			</nav>

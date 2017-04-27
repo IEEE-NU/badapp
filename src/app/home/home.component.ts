@@ -17,7 +17,6 @@ export class HomePage implements OnInit, OnDestroy {
     { label: 'Command', link: 'command' },
     { label: 'Upgrade', link: 'upgrade' },
   ];
-  activeTab = 0;
 
   constructor(public af: AngularFire, private _auth: AuthService, private _router: Router, public _gameState: GameStateService) {
     console.log("HomePage: constructor");

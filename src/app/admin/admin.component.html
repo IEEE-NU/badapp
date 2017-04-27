@@ -1,3 +1,9 @@
-<p>
-  admin works!
-</p>
+<div fxLayout="column" fxFill>
+  <h3>Game parameters</h3>
+  <textarea fxFlex="1 1 auto" (change)="textchange($event, _gameState.gameParams)">{{ _gameState.gameParams | async | json }}</textarea>
+
+  <template ngFor [ngForOf]="_gameState.upgradeTypes" let-type>
+    <h3>{{ (type | async)?.name }} upgrades</h3>
+    <textarea fxFlex="1 1 auto" (change)="textchange($event,type)">{{ type | async | json }}</textarea>
+  </template>
+</div>

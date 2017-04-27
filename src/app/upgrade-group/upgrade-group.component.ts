@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { FirebaseObjectObservable } from "angularfire2";
 
 @Component({
   selector: 'upgrade-group',
@@ -6,8 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./upgrade-group.component.scss']
 })
 export class UpgradeGroupComponent implements OnInit {
-  @Input() upgrades: object[];
-  @Input() name: string;
+  @Input() upgrades: FirebaseObjectObservable<any>;
 
   constructor() {
   }

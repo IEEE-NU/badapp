@@ -10,6 +10,8 @@ export class GameStateService {
   public user: Player;
   public userRef: FirebaseObjectObservable<any>;
   public userSubscription: Subscription;
+  public gameParams: FirebaseObjectObservable<any>;
+  public upgradeTypes: FirebaseObjectObservable<any>[];
   private userIsBot: boolean;
   constructor(private af: AngularFire, private _auth: AuthService) {
     console.log("GameStateService: constructor");
@@ -19,6 +21,13 @@ export class GameStateService {
     } else {
       this._auth.subscribeLogin(() => this.loadUserData());
     }
+    this.gameParams = this.af.database.object('/game-params');
+    this.gameParams.subscribe(params => {
+      this.upgradeTypes = [];
+      for (let i = 0, l = params.upgradeTypes.length; i < l; i++) {
+        this.upgradeTypes.push(this.af.database.object(params.upgradeTypes[i]));
+      }
+    });
   }
 
   private loadUserData(): void {

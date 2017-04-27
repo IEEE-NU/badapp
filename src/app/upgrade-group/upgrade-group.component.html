@@ -1,6 +1,6 @@
 <div class="upgrade-col" fxFlex>
-  <h1>{{ name }}</h1>
-  <md-card *ngFor="let upgrade of upgrades">
+  <h1>{{ (upgrades | async)?.name }}</h1>
+  <md-card *ngFor="let upgrade of upgrades | async | omit: 'name' | values">
     <md-card-title>{{ upgrade.name }}</md-card-title>
     <md-card-subtitle>Owned: 0</md-card-subtitle>
     <img class="center-img" [src]="upgrade.picture">

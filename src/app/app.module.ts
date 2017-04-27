@@ -42,7 +42,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'upgrade',
+        redirectTo: 'command',
         pathMatch: 'full'
       },
       {
@@ -58,6 +58,10 @@ const routes: Routes = [
         component: AdminComponent
       }
     ]
+  },
+  {
+    path: '**',
+    redirectTo: 'home'
   }
 ];
 

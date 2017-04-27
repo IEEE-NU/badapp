@@ -4,6 +4,7 @@ export class Player {
     nuggets: number;
     photo: string;
     title: string;
+    admin: boolean;
     constructor(id: string, name: string, nuggets: number, photo: string, title: string) {
         this.id = id;
         this.name = name;
