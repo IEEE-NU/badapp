@@ -1,0 +1,14 @@
+<div class="upgrade-col" fxFlex>
+  <h1>{{ name }}</h1>
+  <md-card *ngFor="let upgrade of upgrades">
+    <md-card-title>{{ upgrade.name }}</md-card-title>
+    <md-card-subtitle>Owned: 0</md-card-subtitle>
+    <img class="center-img" [src]="upgrade.picture">
+    <md-card-content>
+      <p>{{ upgrade.description }}</p>
+    </md-card-content>
+    <md-card-actions>
+      <button md-button>PURCHASE FOR {{ upgrade.cost }} NUGGETS</button>
+    </md-card-actions>
+  </md-card>
+</div>

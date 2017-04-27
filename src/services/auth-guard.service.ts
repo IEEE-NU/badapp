@@ -8,8 +8,8 @@ export class AuthGuard implements CanActivate {
 
     canActivate() {
         if (!this._auth.hasAuthenticated) {
-            return this._auth.subscribe((authState) => {
-                this.canActivate();
+            return this._auth.getObservable().first().map(authState => {
+                return authState != null;
             });
         }
 

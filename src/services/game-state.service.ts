@@ -11,7 +11,6 @@ export class GameStateService {
   public userRef: FirebaseObjectObservable<any>;
   public userSubscription: Subscription;
   private userIsBot: boolean;
-  private oldSetInterval: any;
   constructor(private af: AngularFire, private _auth: AuthService) {
     console.log("GameStateService: constructor");
     console.log("GameStateService: onInit");

@@ -15,7 +15,9 @@ import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import { AuthGuard } from "../services/auth-guard.service";
 import { AuthService } from "../services/auth.service";
 import { CommandComponent } from './command/command.component';
-import { UpgradeComponent } from './upgrade/upgrade.component';
+import { UpgradeTabComponent } from "./upgrade-tab/upgrade-tab.component";
+import { UpgradeGroupComponent } from './upgrade-group/upgrade-group.component';
+import { AdminComponent } from './admin/admin.component';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyA-qxU8pP8stbuuncVG4j_iSPfPvQl6GD0",
@@ -27,6 +29,11 @@ export const firebaseConfig = {
 };
 
 const routes: Routes = [
+  {
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full'
+  },
   { path: 'login', component: LoginComponent },
   {
     path: 'home',
@@ -35,7 +42,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'command',
+        redirectTo: 'upgrade',
         pathMatch: 'full'
       },
       {
@@ -44,7 +51,11 @@ const routes: Routes = [
       },
       {
         path: 'upgrade',
-        component: UpgradeComponent
+        component: UpgradeTabComponent
+      },
+      {
+        path: 'admin',
+        component: AdminComponent
       }
     ]
   }
@@ -64,7 +75,9 @@ const routes: Routes = [
     PlayerCardComponent,
     LeaderboardComponent,
     CommandComponent,
-    UpgradeComponent
+    UpgradeTabComponent,
+    UpgradeGroupComponent,
+    AdminComponent
   ],
   providers: [
     AuthService, AuthGuard, MdIconRegistry

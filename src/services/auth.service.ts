@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth, FirebaseAuthState, AuthProviders, AuthMethods } from 'angularfire2';
+import { Observable } from "rxjs/Observable";
 import firebase from 'firebase';
 
 @Injectable()
@@ -21,8 +22,12 @@ export class AuthService {
     return this.authState !== undefined;
   }
 
-  subscribe(callback: (state: FirebaseAuthState) => any): any {
-    return this.auth$.subscribe(callback);
+  subscribe(callback: (state: FirebaseAuthState) => void): void {
+    this.auth$.subscribe(callback);
+  }
+
+  getObservable(): Observable<FirebaseAuthState> {
+    return this.auth$.asObservable();
   }
 
   subscribeLogin(callback: () => void): void {

@@ -1,0 +1,27 @@
+:host {
+    display: flex;
+    flex: 1;
+}
+
+.upgrade-col {
+    padding: 8px;
+    border-right: 1px solid rgba(0, 0, 0, 0.12);
+    overflow-y: auto;
+}
+
+.upgrade-col > h1 {
+    text-align: center;
+}
+
+.upgrade-col > md-card {
+    margin-top: 8px;
+}
+
+.center-img {
+    display: block;
+    margin: 0 auto 8px auto;
+}
+
+md-card-title {
+    margin-bottom: 8px;
+}
