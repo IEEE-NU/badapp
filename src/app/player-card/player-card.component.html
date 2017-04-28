@@ -4,10 +4,10 @@
     <span md-line>{{ player.title }}</span>
     <span md-line>Nuggets: {{ player.nuggets }}</span>
     <span md-line>Score: {{ player.score }}</span>
-    <button #help md-mini-fab (click)="gameState.help(player)" mdTooltip="Help generate nuggets" mdTooltipPosition="above">
+    <button #help md-mini-fab (click)="gameState.help(player)" mdTooltip="Help generate nuggets" mdTooltipPosition="left">
         <md-icon fontIcon="game-icon-heart-plus"></md-icon>
     </button>
-    <button #attack md-mini-fab (click)="gameState.attack(player)" mdTooltip="Attack to reduce nuggets!" mdTooltipPosition="above">
+    <button #attack md-mini-fab (click)="gameState.attack(player)" mdTooltip="Attack to reduce nuggets!" mdTooltipPosition="left">
         <md-icon fontIcon="game-icon-crossed-swords"></md-icon>
     </button>
 </md-list-item>
