@@ -8,7 +8,7 @@ import { Upgrade } from "../../classes";
   styleUrls: ['./upgrade-tab.component.scss']
 })
 export class UpgradeTabComponent implements OnInit {
-  constructor(private _gameState: GameStateService) { }
+  constructor(public gameState: GameStateService) { }
 
   ngOnInit() {
   }

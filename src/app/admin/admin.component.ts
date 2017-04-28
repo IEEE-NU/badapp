@@ -8,10 +8,8 @@ import { Router } from "@angular/router";
   styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent {
-  gameState: GameStateService;
   @ViewChildren('upgradeText') upgradeTexts: QueryList<ElementRef>;
-  constructor(gameState: GameStateService, private _router: Router) {
-    this.gameState = gameState;
+  constructor(public gameState: GameStateService, private _router: Router) {
     gameState.userRef.subscribe(user => {
       if (!user.admin) {
         this._router.navigate(['/home']);

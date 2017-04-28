@@ -11,7 +11,7 @@ import { FirebaseListObservable, AngularFire } from "angularfire2";
 export class LeaderboardComponent implements OnInit {
   leaderboard: FirebaseListObservable<any>;
   orderBy: string = 'nuggets';
-  constructor(private af: AngularFire, private _gameState: GameStateService) {
+  constructor(private af: AngularFire, public gameState: GameStateService) {
     this.leaderboard = this.af.database.list('/users');
   }
 
