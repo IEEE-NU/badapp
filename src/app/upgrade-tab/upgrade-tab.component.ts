@@ -13,7 +13,7 @@ export class UpgradeTabComponent implements OnInit {
   ngOnInit() {
   }
 
-  buyUpgrade(upgrade: Upgrade) {
-    
+  upgradeTrackBy(upgrade: Upgrade) {
+    return upgrade.id;
   }
 }

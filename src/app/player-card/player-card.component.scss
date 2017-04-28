@@ -1,3 +1,15 @@
+md-list-item {
+    transition: background-color 200ms;
+}
+
+.attacking {
+    background-color: rgba(230, 0, 38, 0.8);
+}
+
+.helping {
+    background-color: rgba(157, 219, 60, 0.8);
+}
+
 .player-image {
     background-size: cover;
 }

@@ -3,17 +3,18 @@ import { FirebaseObjectObservable, AngularFire } from "angularfire2";
 import { Subscription } from "rxjs/Subscription";
 
 import { AuthService } from "./auth.service";
-import { Player, UpgradeObj } from "../classes";
+import { Player, Upgrade } from "../classes";
 
 @Injectable()
 export class GameStateService {
   public user: Player;
-  public userRef: FirebaseObjectObservable<any>;
+  public userRef: FirebaseObjectObservable<Player>;
   public userSubscription: Subscription;
   public gameParams: FirebaseObjectObservable<any>;
-  public upgrades: UpgradeObj;
-  public upgradesRef: FirebaseObjectObservable<UpgradeObj>;
-  private userIsBot: boolean;
+  public upgrades: Upgrade[] = [];
+  public upgradesRef: FirebaseObjectObservable<any>;
+  attackTimeout: number;
+  healTimeout: number;
   constructor(private af: AngularFire, private _auth: AuthService) {
     console.log("GameStateService: constructor");
     if (this._auth.authenticated) {
@@ -23,21 +24,21 @@ export class GameStateService {
     }
     this.gameParams = this.af.database.object('/game-params');
     this.upgradesRef = this.af.database.object('/upgrades');
-    this.upgradesRef.subscribe(upgrades => this.upgrades = upgrades);
+    this.upgradesRef.subscribe(upgrades => {
+      for (let key in upgrades) {
+        this.upgrades.push(this.cast<Upgrade>(upgrades[key], Upgrade));
+      }
+    });
   }
 
   private loadUserData(): void {
     this.userRef = this.af.database.object('users/' + this._auth.getUID());
     this.userSubscription = this.userRef.subscribe(obj => {
-      this.user = obj;
+      this.user = this.cast<Player>(obj, Player);
       if (!obj.$exists()) {
         this.addNewUser(this._auth.getUser());
       }
     });
-    // Anti-bot measures ;)
-    setTimeout(() => {
-      this.userIsBot = this.isBot();
-    }, 5000);
   }
 
   private addNewUser(user: firebase.User) {
@@ -49,7 +50,7 @@ export class GameStateService {
   }
 
   generateNuggetsClick() {
-    if (this.userIsBot || this.user.banned) return;
+    if (this.isBot || this.user.banned) return;
     this.userRef.$ref.transaction(user => {
       user.nuggets++;
       return user;
@@ -57,18 +58,33 @@ export class GameStateService {
   }
 
   attack(player: Player) {
-    if (this.userIsBot || this.user.banned) return;
+    if (this.isBot || this.user.banned) return;
     this.af.database.object('users/' + player.id).$ref
       .transaction(user => { user.nuggets--; return user; });
+    this.userRef.$ref.update({ attacking: player.id });
+    clearTimeout(this.attackTimeout);
+    this.attackTimeout = setTimeout(() => this.userRef.$ref.update({ attacking: '' }), 500);
   }
 
   help(player: Player) {
-    if (this.userIsBot || this.user.banned) return;
+    if (this.isBot || this.user.banned) return;
     this.af.database.object('users/' + player.id).$ref
       .transaction(user => { user.nuggets++; return user; });
+    this.userRef.$ref.update({ helping: player.id });
+    clearTimeout(this.healTimeout);
+    this.healTimeout = setTimeout(() => this.userRef.$ref.update({ helping: '' }), 500);
   }
 
-  private isBot(): boolean {
+  buyUpgrade(upgrade: Upgrade): void {
+    console.log("Buying upgrade " + upgrade.name);
+    this.userRef.$ref.transaction(user => {
+      user = this.cast<Player>(user, Player);
+      user.addUpgrade(upgrade);
+      return user;
+    });
+  }
+
+  private get isBot(): boolean {
     if ('$cdc_asdjflasutopfhvcZLmcfl_' in document
       || '$wdc_' in document
       || "__webdriver_script_fn" in document
@@ -78,5 +94,10 @@ export class GameStateService {
     } else {
       return false;
     }
+  }
+
+  cast<T>(obj: any, cl: any): T {
+    obj.__proto__ = cl.prototype;
+    return obj;
   }
 }

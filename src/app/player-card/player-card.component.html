@@ -1,4 +1,4 @@
-<md-list-item>
+<md-list-item [ngClass]="statusClass()">
     <img md-list-avatar class="player-image" src="{{ player.photo || '' }}" />
     <h3 md-line>{{ player.name }}</h3>
     <span md-line>{{ player.title }}</span>

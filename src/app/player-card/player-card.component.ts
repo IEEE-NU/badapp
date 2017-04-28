@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, EventEmitter, Output, ViewChild } from '@angular/core';
 import { MdButton } from "@angular/material";
 import { Player } from "../../classes";
+import { GameStateService } from "../../services/game-state.service";
 
 @Component({
   selector: 'player-card',
@@ -14,7 +15,7 @@ export class PlayerCardComponent implements OnInit {
   @Output() onHelp = new EventEmitter<Player>();
   @ViewChild("attack") attackButton: MdButton;
   @ViewChild("help") helpButton: MdButton;
-  constructor() { }
+  constructor(private _gameState: GameStateService) { }
 
   ngOnInit() {
     this.attackButton.disabled = !this.canAttack;
@@ -27,5 +28,13 @@ export class PlayerCardComponent implements OnInit {
 
   helpPlayer() {
     this.onHelp.emit(this.player);
+  }
+
+  statusClass() {
+    if (this.player.attacking === this._gameState.user.id) {
+      return 'attacking';
+    } else if (this.player.helping === this._gameState.user.id) {
+      return 'helping';
+    }
   }
 }
