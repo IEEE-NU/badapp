@@ -4,6 +4,6 @@
 
   <ng-template ngFor [ngForOf]="(gameState.gameParams | async)?.upgradeTypes" let-type>
     <h3>{{ type | ucfirst }} upgrades</h3>
-    <textarea #upgradeText fxFlex="1 1 auto" (change)="upgradeChange()">{{ gameState.upgrades | filterBy: ['type']: type | json }}</textarea>
+    <textarea #upgradeText fxFlex="1 1 auto" (change)="upgradeChange()">{{ gameState.upgradesAsync | async | filterBy: ['type']: type | json }}</textarea>
   </ng-template>
 </div>

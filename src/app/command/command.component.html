@@ -1,11 +1,11 @@
 <md-grid-list id="command" cols="2" rowHeight="fit">
   <md-grid-tile rowspan="2">
     <md-grid-tile-header>
-      <h1 class="overlay-text">Click to get {{ 1 + gameState.user?.click_prod }} nuggets!</h1>
+      <h1 class="overlay-text">Click to get {{ (gameState.userAsync | async)?.nuggetsPerClick }} nugget{{ (gameState.userAsync | async)?.nuggetsPerClick > 1 ? 's' : '' }}!</h1>
     </md-grid-tile-header>
-    <img id="generate_nuggets" src="assets/nugget_bucket.png" (click)="gameState.generateNuggets()" />
+    <img id="generate_nuggets" src="assets/nugget_bucket.jpg" (click)="gameState.generateNuggets()" />
     <md-grid-tile-footer>
-      <h1 class="overlay-text">{{ gameState.user?.nuggets }}</h1>
+      <h1 class="overlay-text">{{ (gameState.userAsync | async)?.nuggets }}</h1>
     </md-grid-tile-footer>
   </md-grid-tile>
   <md-grid-tile rowspan="2">
@@ -13,25 +13,25 @@
       <h1>Stats</h1>
       <h3>Production</h3>
       <ul>
-        <li>Nuggets per click: {{ gameState.user?.nuggetsPerClick }}</li>
-        <li>Nuggets per second: {{ gameState.user?.sec_prod }}</li>
+        <li>Nuggets per click: {{ (gameState.userAsync | async)?.nuggetsPerClick }}</li>
+        <li>Nuggets per second: {{ (gameState.userAsync | async)?.sec_prod }}</li>
       </ul>
       <h3>Offense</h3>
       <ul>
-        <li>Base attack per click: {{ 1 + gameState.user?.attack }}</li>
-        <li>Multiplier: {{ 1 + gameState.user?.rel_attack }}</li>
-        <li>Total attack per click: {{ gameState.user?.damagePerClick }}</li>
-        <li>Percent of damage stolen per click: {{ gameState.user?.steal }}</li>
+        <li>Base attack per click: {{ 1 + (gameState.userAsync | async)?.attack }}</li>
+        <li>Multiplier: {{ 1 + (gameState.userAsync | async)?.rel_attack }}</li>
+        <li>Total attack per click: {{ (gameState.userAsync | async)?.damagePerClick }}</li>
+        <li>Percent of damage stolen per click: {{ (gameState.userAsync | async)?.steal }}</li>
       </ul>
       <h3>Defense</h3>
       <ul>
-        <li>Base defense: {{ gameState.user?.abs_defense }}</li>
-        <li>Percent defense: {{ gameState.user?.rel_defense }}</li>
+        <li>Base defense: {{ (gameState.userAsync | async)?.abs_defense }}</li>
+        <li>Percent defense: {{ (gameState.userAsync | async)?.rel_defense }}</li>
       </ul>
       <h3>Support</h3>
       <ul>
-        <li>Nuggets per click (them): {{ gameState.user?.helpPerClick }}</li>
-        <li>Nuggets per click (you): {{ gameState.user?.selfHelpPerClick }}</li>
+        <li>Nuggets per click (them): {{ (gameState.userAsync | async)?.helpPerClick }}</li>
+        <li>Nuggets per click (you): {{ (gameState.userAsync | async)?.selfHelpPerClick }}</li>
       </ul>
 
       <h1>How does damage work?</h1>

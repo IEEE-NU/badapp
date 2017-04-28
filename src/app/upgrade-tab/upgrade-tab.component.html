@@ -1,16 +1,16 @@
 <div fxLayout="row" fxLayoutAlign="stretch" fxFlex>
-    <div class="upgrade-col" fxFlex *ngFor="let type of (gameState.gameParams | async)?.upgradeTypes">
-      <h1>{{ type | ucfirst }}</h1>
-      <md-card *ngFor="let upgrade of gameState.upgrades | filterBy: ['type']: type; trackBy: upgradeTrackBy">
-        <md-card-title>{{ upgrade.name }}</md-card-title>
-        <md-card-subtitle>Owned: {{ gameState.user?.upgradeCount(upgrade) }}</md-card-subtitle>
-        <img class="center-img" [src]="upgrade.picture">
-        <md-card-content>
-          <p>{{ upgrade.description }}</p>
-        </md-card-content>
-        <md-card-actions>
-          <button md-button (click)="gameState.buyUpgrade(upgrade)">PURCHASE: {{ upgrade.cost(gameState.user) }} NUGGETS</button>
-        </md-card-actions>
-      </md-card>
-    </div>
+  <div class="upgrade-col" fxFlex *ngFor="let type of (gameState.gameParams | async)?.upgradeTypes">
+    <h1>{{ type | ucfirst }}</h1>
+    <md-card *ngFor="let upgrade of gameState.upgradesAsync | async | filterBy: ['type']: type; trackBy: upgradeTrackBy">
+      <md-card-title>{{ upgrade.name }}</md-card-title>
+      <md-card-subtitle>Owned: {{ gameState.user?.upgradeCount(upgrade) }}</md-card-subtitle>
+      <img class="center-img" [src]="upgrade.picture">
+      <md-card-content>
+        <p>{{ upgrade.description }}</p>
+      </md-card-content>
+      <md-card-actions>
+        <button md-button (click)="gameState.buyUpgrade(upgrade)">PURCHASE: {{ upgrade.cost(gameState.user) }} NUGGETS</button>
+      </md-card-actions>
+    </md-card>
+  </div>
 </div>

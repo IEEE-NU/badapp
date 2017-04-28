@@ -4,16 +4,18 @@ import { Subscription } from "rxjs/Subscription";
 
 import { AuthService } from "./auth.service";
 import { Player, Upgrade } from "../classes";
+import { Observable } from "rxjs/Observable";
 
 @Injectable()
 export class GameStateService {
   private gameVersion = 2;
   public user: Player;
   public userRef: FirebaseObjectObservable<Player>;
-  public userSubscription: Subscription;
+  public userAsync: Observable<Player>;
   public gameParams: FirebaseObjectObservable<any>;
   public upgrades: Upgrade[] = [];
   public upgradesRef: FirebaseObjectObservable<any>;
+  public upgradesAsync: Observable<Upgrade[]>;
   attackTimeout: number;
   healTimeout: number;
   constructor(private af: AngularFire, private _auth: AuthService) {
@@ -30,22 +32,24 @@ export class GameStateService {
       }
     });
     this.upgradesRef = this.af.database.object('/upgrades');
-    this.upgradesRef.subscribe(upgrades => {
+    this.upgradesAsync = this.af.database.object('/upgrades').map(upgrades => {
       this.upgrades = [];
       for (let key in upgrades) {
         this.upgrades.push(this.cast<Upgrade>(upgrades[key], Upgrade));
       }
+      return this.upgrades;
     });
   }
 
   private loadUserData(): void {
     this.userRef = this.af.database.object('users/' + this._auth.getUID());
-    this.userSubscription = this.userRef.subscribe(obj => {
-      if (!obj.$exists()) {
+    this.userAsync = this.userRef.map(u => this.cast<Player>(u, Player));
+    this.userAsync.subscribe(u => {
+      if (!u.$exists()) {
         this.addNewUser(this._auth.getUser());
         return;
       }
-      this.user = this.cast<Player>(obj, Player);
+      this.user = u;
       if (this.user.superBanned) {
         this._auth.signOut();
       }
@@ -136,7 +140,7 @@ export class GameStateService {
     }
   }
 
-  cast<T>(obj: any, cl: any): T {
+  public cast<T>(obj: any, cl: any): T {
     obj.__proto__ = cl.prototype;
     return obj;
   }
