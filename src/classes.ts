@@ -81,10 +81,9 @@ export class Player {
 
     public addUpgrade(upgrade: Upgrade): void {
         const cost = upgrade.cost(this);
-        this.nuggets -= cost;
+        this.changeNuggets(-cost);
         this[upgrade.id] = this.upgradeCount(upgrade) + 1;
         this.score += Math.round(cost / 2);
-        this.updateTitle();
     }
 
     public clearStats(): void {
