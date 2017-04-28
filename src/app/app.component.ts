@@ -13,5 +13,6 @@ import { AuthService } from "../services/auth.service";
 export class AppComponent {
   constructor(private _auth: AuthService, private _router: Router, private _mdIconRegistry: MdIconRegistry) {
     _mdIconRegistry.setDefaultFontSetClass("game-icon");
+    this._auth.subscribeLogout(() => this._router.navigate(['/login']));
   }
 }

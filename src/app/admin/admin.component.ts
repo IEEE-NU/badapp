@@ -8,9 +8,11 @@ import { Router } from "@angular/router";
   styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent {
+  gameState: GameStateService;
   @ViewChildren('upgradeText') upgradeTexts: QueryList<ElementRef>;
-  constructor(private _gameState: GameStateService, private _router: Router) {
-    _gameState.userRef.subscribe(user => {
+  constructor(gameState: GameStateService, private _router: Router) {
+    this.gameState = gameState;
+    gameState.userRef.subscribe(user => {
       if (!user.admin) {
         this._router.navigate(['/home']);
       }
@@ -19,7 +21,7 @@ export class AdminComponent {
 
   gameParamChange(event: Event) {
     let element = <HTMLInputElement>event.srcElement;
-    this._gameState.gameParams.$ref.set(JSON.parse(element.value));
+    this.gameState.gameParams.$ref.set(JSON.parse(element.value));
   }
 
   upgradeChange() {
@@ -30,6 +32,6 @@ export class AdminComponent {
         newUpgrades[upgrades[i].id] = upgrades[i];
       }
     });
-    this._gameState.upgradesRef.set(newUpgrades);
+    this.gameState.upgradesRef.set(newUpgrades);
   }
 }

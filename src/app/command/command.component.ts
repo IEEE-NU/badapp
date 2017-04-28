@@ -7,7 +7,7 @@ import { GameStateService } from "../../services/game-state.service";
   styleUrls: ['./command.component.scss']
 })
 export class CommandComponent implements OnInit {
-  constructor(private _gameState: GameStateService) { }
+  constructor(gameState: GameStateService) { }
 
   ngOnInit() {
   }
