@@ -13,7 +13,7 @@ export class PlayerCardComponent implements OnInit {
   @Input() player: Player;
   @ViewChild("attack") attackButton: MdButton;
   @ViewChild("help") helpButton: MdButton;
-  constructor(private gameState: GameStateService) { }
+  constructor(public gameState: GameStateService) { }
 
   ngOnInit() {
     const isSelf = this.player.id === this.gameState.user.id;

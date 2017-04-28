@@ -7,7 +7,7 @@ import { Observable } from "rxjs/Observable";
 
 @Injectable()
 export class GameStateService {
-  private gameVersion = 2;
+  private gameVersion = 3;
   public user: Player;
   public userRef: FirebaseObjectObservable<Player>;
   public userAsync: Observable<Player>;
