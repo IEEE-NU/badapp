@@ -50,9 +50,41 @@ export class Player {
         return this[upgrade.id] || 0;
     }
 
+    public changeNuggets(n: number): void {
+        if (!n) return;
+        this.nuggets += n;
+        this.score += n;
+        this.updateTitle();
+    }
+
+    public updateTitle() {
+        if (this.score <= 200) {
+            this.title = "Noob nugget";
+        } else if (this.score <= 1000) {
+            this.title = "Raw nugget";
+        } else if (this.score <= 5000) {
+            this.title = "Saucy nugget";
+        } else if (this.score <= 10000) {
+            this.title = "Prince nugget";
+        } else if (this.score <= 50000) {
+            this.title = "King nugget";
+        } else if (this.score <= 100000) {
+            this.title = "Obssessed nugget";
+        } else if (this.score <= 500000) {
+            this.title = "Please take a break";
+        } else if (this.score <= 1000000) {
+            this.title = "Loser";
+        } else {
+            this.title = "HUGE loser";
+        }
+    }
+
     public addUpgrade(upgrade: Upgrade): void {
-        this.nuggets -= upgrade.cost(this);
+        const cost = upgrade.cost(this);
+        this.nuggets -= cost;
         this[upgrade.id] = this.upgradeCount(upgrade) + 1;
+        this.score += Math.round(cost / 2);
+        this.updateTitle();
     }
 
     public clearStats(): void {
@@ -68,6 +100,7 @@ export class Player {
     }
 
     public calculateStats(upgrades: Upgrade[]): void {
+        this.clearStats();
         for (let i = 0, l = upgrades.length; i < l; i++) {
             let u = upgrades[i];
             let count = this.upgradeCount(u);
@@ -75,15 +108,6 @@ export class Player {
                 this[u.stat] = u.stat_change * count;
             }
         }
-    }
-
-    public updateStats(upgrades: Upgrade[]): void {
-        this.clearStats();
-        this.calculateStats(upgrades);
-    }
-
-    public updateTitle() {
-
     }
 }
 

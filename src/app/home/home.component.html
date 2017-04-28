@@ -8,7 +8,7 @@
 	<div fxLayout="row">
 		<leaderboard-panel></leaderboard-panel>
 
-		<div fxLayout="column" fxFlex>
+		<div id="tab-container" fxLayout="column" fxFlex>
 			<nav md-tab-nav-bar>
 				<a md-tab-link *ngFor="let tabLink of tabLinks; let i = index" [routerLink]="tabLink.link" routerLinkActive
 				 #rla="routerLinkActive" [active]="rla.isActive">

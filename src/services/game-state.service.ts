@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { FirebaseObjectObservable, AngularFire } from "angularfire2";
-import { Subscription } from "rxjs/Subscription";
 
 import { AuthService } from "./auth.service";
 import { Player, Upgrade } from "../classes";
@@ -67,7 +66,8 @@ export class GameStateService {
   changeSelfNuggets(n: number): void {
     if (!n) return;
     this.userRef.$ref.transaction(user => {
-      user.nuggets += n;
+      user = this.cast<Player>(user, Player);
+      user.changeNuggets(n);
       return user;
     });
   }
@@ -75,7 +75,8 @@ export class GameStateService {
   changeOtherNuggets(player: Player, n: number): void {
     if (!n) return;
     this.af.database.object('users/' + player.id).$ref.transaction(user => {
-      user.nuggets += n;
+      user = this.cast<Player>(user, Player);
+      user.changeNuggets(n);
       return user;
     });
   }
@@ -91,6 +92,7 @@ export class GameStateService {
     let defense = Math.round(player.abs_defense + attack * player.rel_defense);
     let damage = attack - defense;
     if (damage < 0) return false;
+    //TODO: snackbar
     this.changeOtherNuggets(player, -damage);
     this.changeSelfNuggets(Math.round(damage * this.user.steal));
 
@@ -113,10 +115,11 @@ export class GameStateService {
   buyUpgrade(upgrade: Upgrade): void {
     console.log("Buying upgrade " + upgrade.name);
     if (this.user.nuggets < upgrade.cost(this.user)) return;
+    //TODO: snackbar
     this.userRef.$ref.transaction(user => {
       user = this.cast<Player>(user, Player);
       user.addUpgrade(upgrade);
-      user.updateStats(this.upgrades);
+      user.calculateStats(this.upgrades);
       return user;
     });
   }

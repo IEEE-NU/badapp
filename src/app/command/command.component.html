@@ -34,9 +34,14 @@
         <li>Nuggets per click (you): {{ (gameState.userAsync | async)?.selfHelpPerClick }}</li>
       </ul>
 
-      <h1>How does damage work?</h1>
+      <h2>How does damage work?</h2>
       <p>total attack = base attack * multiplier</p>
       <p>damage = total attack - base defense - total attack * percent defense</p>
+
+      <h2>What is the score for?</h2>
+      <p>The winner is whoever has the highest score at the end.</p>
+      <p>score = nuggets + total spent on upgrades / 2</p>
+      <p>Thus, buying upgrades decreases your score, but locks it in</p>
     </div>
   </md-grid-tile>
 </md-grid-list>
