@@ -68,7 +68,7 @@
     "picture": "",
     "scale_factor": 1.25,
     "stat": "rel_attack",
-    "stat_change": 2,
+    "stat_change": 0.02,
     "type": "offense"
   },
   {
@@ -80,7 +80,7 @@
     "picture": "",
     "scale_factor": 1.07,
     "stat": "steal",
-    "stat_change": 1,
+    "stat_change": 0.01,
     "type": "offense"
   }
 ]

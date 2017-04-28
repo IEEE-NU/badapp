@@ -55,32 +55,52 @@ export class GameStateService {
   private addNewUser(user: firebase.User) {
     this.af.database.object('users/').update(
       {
-        [user.uid]: new Player(user.uid, user.displayName, 0, user.photoURL, "Noob nugget")
+        [user.uid]: new Player(user.uid, user.displayName, user.photoURL)
       }
     );
   }
 
-  generateNuggetsClick() {
-    if (this.isBot || this.user.banned) return;
+  changeSelfNuggets(n: number): void {
+    if (!n) return;
     this.userRef.$ref.transaction(user => {
-      user.nuggets++;
+      user.nuggets += n;
       return user;
     });
   }
 
-  attack(player: Player) {
+  changeOtherNuggets(player: Player, n: number): void {
+    if (!n) return;
+    this.af.database.object('users/' + player.id).$ref.transaction(user => {
+      user.nuggets += n;
+      return user;
+    });
+  }
+
+  generateNuggets() {
     if (this.isBot || this.user.banned) return;
-    this.af.database.object('users/' + player.id).$ref
-      .transaction(user => { user.nuggets--; return user; });
+    this.changeSelfNuggets(this.user.nuggetsPerClick);
+  }
+
+  attack(player: Player): boolean {
+    if (this.isBot || this.user.banned) return;
+    let attack = this.user.damagePerClick;
+    let defense = Math.round(player.abs_defense + attack * player.rel_defense);
+    let damage = attack - defense;
+    if (damage < 0) return false;
+    this.changeOtherNuggets(player, -damage);
+    this.changeSelfNuggets(Math.round(damage * this.user.steal));
+
     this.userRef.$ref.update({ attacking: player.id });
     clearTimeout(this.attackTimeout);
     this.attackTimeout = setTimeout(() => this.userRef.$ref.update({ attacking: '' }), 500);
+    return true;
   }
 
   help(player: Player) {
     if (this.isBot || this.user.banned) return;
-    this.af.database.object('users/' + player.id).$ref
-      .transaction(user => { user.nuggets++; return user; });
+    this.changeOtherNuggets(player, this.user.helpPerClick);
+    this.changeSelfNuggets(this.user.selfHelpPerClick);
+
     this.userRef.$ref.update({ helping: player.id });
     clearTimeout(this.healTimeout);
     this.healTimeout = setTimeout(() => this.userRef.$ref.update({ helping: '' }), 500);
@@ -92,9 +112,12 @@ export class GameStateService {
     this.userRef.$ref.transaction(user => {
       user = this.cast<Player>(user, Player);
       user.addUpgrade(upgrade);
+      user.clearStats();
       for (let i = 0, l = this.upgrades.length; i < l; i++) {
-        if (user.upgradeCount(this.upgrades[i])) {
-
+        let u = this.upgrades[i];
+        let count = user.upgradeCount(u);
+        if (count > 0) {
+          user[u.stat] = u.stat_change * count;
         }
       }
       return user;

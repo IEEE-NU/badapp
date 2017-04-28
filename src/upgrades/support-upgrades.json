@@ -68,7 +68,7 @@
         "picture": "",
         "scale_factor": 2.0,
         "stat": "self_click_help",
-        "stat_change": 5,
+        "stat_change": 0.05,
         "type": "support"
     }
 ]

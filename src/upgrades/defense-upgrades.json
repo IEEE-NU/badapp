@@ -68,7 +68,7 @@
     "picture": "",
     "scale_factor": 2.0,
     "stat": "rel_defense",
-    "stat_change": 1,
+    "stat_change": 0.01,
     "type": "defense"
   },
   {
@@ -80,7 +80,7 @@
     "picture": "",
     "scale_factor": 2.0,
     "stat": "rel_defense",
-    "stat_change": 5,
+    "stat_change": 0.05,
     "type": "defense"
   },
   {
@@ -92,7 +92,7 @@
     "picture": "",
     "scale_factor": 2.0,
     "stat": "rel_defense",
-    "stat_change": 10,
+    "stat_change": 0.10,
     "type": "defense"
   }
 ]
