@@ -116,14 +116,7 @@ export class GameStateService {
     this.userRef.$ref.transaction(user => {
       user = this.cast<Player>(user, Player);
       user.addUpgrade(upgrade);
-      user.clearStats();
-      for (let i = 0, l = this.upgrades.length; i < l; i++) {
-        let u = this.upgrades[i];
-        let count = user.upgradeCount(u);
-        if (count > 0) {
-          user[u.stat] = u.stat_change * count;
-        }
-      }
+      user.updateStats(this.upgrades);
       return user;
     });
   }

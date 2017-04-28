@@ -67,6 +67,21 @@ export class Player {
         this.self_click_help = 0;
     }
 
+    public calculateStats(upgrades: Upgrade[]): void {
+        for (let i = 0, l = upgrades.length; i < l; i++) {
+            let u = upgrades[i];
+            let count = this.upgradeCount(u);
+            if (count > 0) {
+                this[u.stat] = u.stat_change * count;
+            }
+        }
+    }
+
+    public updateStats(upgrades: Upgrade[]): void {
+        this.clearStats();
+        this.calculateStats(upgrades);
+    }
+
     public updateTitle() {
 
     }

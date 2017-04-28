@@ -12,7 +12,7 @@
 
   <md-list>
     <md-divider></md-divider>
-    <player-card *ngFor="let player of leaderboard | async | orderBy: '-' + orderBy; trackBy: playerTrackBy" [player]="player"
-      [canAttack]="gameState.user?.id != player.id" (onAttack)="gameState.attack($event)" (onHelp)="gameState.help($event)"></player-card>
+    <player-card *ngFor="let player of leaderboard | async | orderBy: '-' + orderBy; trackBy: playerTrackBy"
+      [player]="player"></player-card>
   </md-list>
 </div>

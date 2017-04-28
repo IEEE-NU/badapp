@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Player } from "../../classes";
 import { GameStateService } from "../../services/game-state.service";
 import { FirebaseListObservable, AngularFire } from "angularfire2";
@@ -8,14 +8,11 @@ import { FirebaseListObservable, AngularFire } from "angularfire2";
   templateUrl: './leaderboard.component.html',
   styleUrls: ['./leaderboard.component.scss']
 })
-export class LeaderboardComponent implements OnInit {
+export class LeaderboardComponent {
   leaderboard: FirebaseListObservable<any>;
   orderBy: string = 'nuggets';
   constructor(private af: AngularFire, public gameState: GameStateService) {
     this.leaderboard = this.af.database.list('/users');
-  }
-
-  ngOnInit() {
   }
 
   playerTrackBy(index: number, player: Player) {
