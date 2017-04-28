@@ -104,7 +104,7 @@ export class Player {
             let u = upgrades[i];
             let count = this.upgradeCount(u);
             if (count > 0) {
-                this[u.stat] = u.stat_change * count;
+                this[u.stat] += u.stat_change * count;
             }
         }
     }
