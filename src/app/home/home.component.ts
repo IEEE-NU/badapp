@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from "@angular/router";
 
 import { AngularFire } from 'angularfire2';
@@ -10,7 +10,8 @@ import { GameStateService } from "../../services/game-state.service";
   selector: 'page-home',
   templateUrl: 'home.component.html',
   styleUrls: ['./home.component.scss'],
-  providers: [GameStateService]
+  providers: [GameStateService],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomePage implements OnInit, OnDestroy {
   tabLinks = [
