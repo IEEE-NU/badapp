@@ -3,7 +3,7 @@
       <h1>{{ type | ucfirst }}</h1>
       <md-card *ngFor="let upgrade of gameState.upgrades | filterBy: ['type']: type; trackBy: upgradeTrackBy">
         <md-card-title>{{ upgrade.name }}</md-card-title>
-        <md-card-subtitle>Owned: {{ gameState.user.upgradeCount(upgrade) }}</md-card-subtitle>
+        <md-card-subtitle>Owned: {{ gameState.user?.upgradeCount(upgrade) }}</md-card-subtitle>
         <img class="center-img" [src]="upgrade.picture">
         <md-card-content>
           <p>{{ upgrade.description }}</p>

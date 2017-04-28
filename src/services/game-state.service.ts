@@ -7,6 +7,7 @@ import { Player, Upgrade } from "../classes";
 
 @Injectable()
 export class GameStateService {
+  private gameVersion = 1;
   public user: Player;
   public userRef: FirebaseObjectObservable<Player>;
   public userSubscription: Subscription;
@@ -23,6 +24,11 @@ export class GameStateService {
       this._auth.subscribeLogin(() => this.loadUserData());
     }
     this.gameParams = this.af.database.object('/game-params');
+    this.gameParams.subscribe(params => {
+      if (params.gameVersion > this.gameVersion) {
+        location.reload();
+      }
+    });
     this.upgradesRef = this.af.database.object('/upgrades');
     this.upgradesRef.subscribe(upgrades => {
       for (let key in upgrades) {
@@ -77,6 +83,7 @@ export class GameStateService {
 
   buyUpgrade(upgrade: Upgrade): void {
     console.log("Buying upgrade " + upgrade.name);
+    if (this.user.nuggets < upgrade.cost(this.user)) return;
     this.userRef.$ref.transaction(user => {
       user = this.cast<Player>(user, Player);
       user.addUpgrade(upgrade);

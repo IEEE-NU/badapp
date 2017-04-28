@@ -40,6 +40,7 @@ export class Upgrade {
     max: number;
 
     public cost(user: Player) {
+        if (user == null) return;
         return Math.round(this.base_cost * Math.pow(this.scale_factor, user.upgradeCount(this)));
     }
 }
