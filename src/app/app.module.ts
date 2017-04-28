@@ -16,7 +16,6 @@ import { AuthGuard } from "../services/auth-guard.service";
 import { AuthService } from "../services/auth.service";
 import { CommandComponent } from './command/command.component';
 import { UpgradeTabComponent } from "./upgrade-tab/upgrade-tab.component";
-import { UpgradeGroupComponent } from './upgrade-group/upgrade-group.component';
 import { AdminComponent } from './admin/admin.component';
 
 export const firebaseConfig = {
@@ -80,7 +79,6 @@ const routes: Routes = [
     LeaderboardComponent,
     CommandComponent,
     UpgradeTabComponent,
-    UpgradeGroupComponent,
     AdminComponent
   ],
   providers: [

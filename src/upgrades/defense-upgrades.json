@@ -1,8 +1,8 @@
-{
-  "d0": {
+[
+  {
     "base_cost": 100,
     "description": "Block 1 damage from every attack",
-    "id": "d0",
+    "id": "d00",
     "max": -1,
     "name": "Absolute defense upgrade 1",
     "picture": "",
@@ -11,10 +11,10 @@
     "stat_change": 1,
     "type": "defense"
   },
-  "d1": {
+  {
     "base_cost": 100,
     "description": "Block 5 damage from every attack",
-    "id": "d1",
+    "id": "d01",
     "max": -1,
     "name": "Absolute defense upgrade 2",
     "picture": "",
@@ -23,10 +23,10 @@
     "stat_change": 5,
     "type": "defense"
   },
-  "d2": {
+  {
     "base_cost": 100,
     "description": "Block 10 damage from every attack",
-    "id": "d2",
+    "id": "d02",
     "max": -1,
     "name": "Absolute defense upgrade 3",
     "picture": "",
@@ -35,10 +35,10 @@
     "stat_change": 1,
     "type": "defense"
   },
-  "d3": {
+  {
     "base_cost": 100,
     "description": "Block 100 damage from every attack",
-    "id": "d3",
+    "id": "d03",
     "max": -1,
     "name": "Absolute defense upgrade 4",
     "picture": "",
@@ -47,10 +47,10 @@
     "stat_change": 1,
     "type": "defense"
   },
-  "d4": {
+  {
     "base_cost": 100,
     "description": "Block 1000 damage from every attack",
-    "id": "d4",
+    "id": "d04",
     "max": -1,
     "name": "Absolute defense upgrade 5",
     "picture": "",
@@ -59,10 +59,10 @@
     "stat_change": 1,
     "type": "defense"
   },
-  "d5": {
+  {
     "base_cost": 100,
     "description": "Block 1% damage from every attack",
-    "id": "d5",
+    "id": "d05",
     "max": -1,
     "name": "Relative defense upgrade 1",
     "picture": "",
@@ -71,10 +71,10 @@
     "stat_change": 1,
     "type": "defense"
   },
-  "d6": {
+  {
     "base_cost": 100,
     "description": "Block 5% damage from every attack",
-    "id": "d6",
+    "id": "d06",
     "max": -1,
     "name": "Relative defense upgrade 2",
     "picture": "",
@@ -83,10 +83,10 @@
     "stat_change": 5,
     "type": "defense"
   },
-  "d7": {
+  {
     "base_cost": 100,
     "description": "Block 10% damage from every attack",
-    "id": "d7",
+    "id": "d07",
     "max": -1,
     "name": "Relative defense upgrade 3",
     "picture": "",
@@ -95,4 +95,4 @@
     "stat_change": 1,
     "type": "defense"
   }
-}
+]

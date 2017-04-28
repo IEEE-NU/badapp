@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { FirebaseObjectObservable } from "angularfire2";
+import { Component, ViewChildren, QueryList, ElementRef } from '@angular/core';
 import { GameStateService } from "../../services/game-state.service";
 import { Router } from "@angular/router";
 
@@ -9,6 +8,7 @@ import { Router } from "@angular/router";
   styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent {
+  @ViewChildren('upgradeText') upgradeTexts: QueryList<ElementRef>;
   constructor(private _gameState: GameStateService, private _router: Router) {
     _gameState.userRef.subscribe(user => {
       if (!user.admin) {
@@ -17,9 +17,19 @@ export class AdminComponent {
     });
   }
 
-  textchange(event: Event, dbRef: FirebaseObjectObservable<any>) {
+  gameParamChange(event: Event) {
     let element = <HTMLInputElement>event.srcElement;
-    console.log(element.value);
-    dbRef.$ref.set(JSON.parse(element.value));
+    this._gameState.gameParams.$ref.set(JSON.parse(element.value));
+  }
+
+  upgradeChange() {
+    let newUpgrades: any = {};
+    this.upgradeTexts.forEach(el => {
+      let upgrades = JSON.parse(el.nativeElement.value);
+      for (var i = 0, l = upgrades.length; i < l; i++) {
+        newUpgrades[upgrades[i].id] = upgrades[i];
+      }
+    });
+    this._gameState.upgrades.set(newUpgrades);
   }
 }

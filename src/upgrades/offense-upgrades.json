@@ -1,8 +1,8 @@
-{
-  "o0": {
+[
+  {
     "base_cost": 100,
     "description": "Increase attack power by 1",
-    "id": "o0",
+    "id": "o00",
     "max": -1,
     "name": "Attack upgrade 1",
     "picture": "",
@@ -11,10 +11,10 @@
     "stat_change": 1,
     "type": "offense"
   },
-  "o1": {
+  {
     "base_cost": 100,
     "description": "Increase attack power by 5",
-    "id": "o1",
+    "id": "o01",
     "max": -1,
     "name": "Attack upgrade 2",
     "picture": "",
@@ -23,10 +23,10 @@
     "stat_change": 5,
     "type": "offense"
   },
-  "o2": {
+  {
     "base_cost": 100,
     "description": "Increase attack power by 10",
-    "id": "o2",
+    "id": "o02",
     "max": -1,
     "name": "Attack upgrade 3",
     "picture": "",
@@ -35,10 +35,10 @@
     "stat_change": 10,
     "type": "offense"
   },
-  "o3": {
+  {
     "base_cost": 100,
     "description": "Increase attack power by 50",
-    "id": "o3",
+    "id": "o03",
     "max": -1,
     "name": "Attack upgrade 4",
     "picture": "",
@@ -47,10 +47,10 @@
     "stat_change": 50,
     "type": "offense"
   },
-  "o4": {
+  {
     "base_cost": 100,
     "description": "Increase attack power by 100",
-    "id": "o4",
+    "id": "o04",
     "max": -1,
     "name": "Attack upgrade 5",
     "picture": "",
@@ -59,10 +59,10 @@
     "stat_change": 100,
     "type": "offense"
   },
-  "o5": {
+  {
     "base_cost": 100,
     "description": "Deal 2% more damage per attack",
-    "id": "o5",
+    "id": "o05",
     "max": -1,
     "name": "Attack upgrade X",
     "picture": "",
@@ -71,10 +71,10 @@
     "stat_change": 2,
     "type": "offense"
   },
-  "o6": {
+  {
     "base_cost": 100,
     "description": "Steal 1% more damage as nuggets",
-    "id": "o6",
+    "id": "o06",
     "max": 50,
     "name": "Attack upgrade Y",
     "picture": "",
@@ -83,4 +83,4 @@
     "stat_change": 1,
     "type": "offense"
   }
-}
+]

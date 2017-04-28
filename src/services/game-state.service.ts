@@ -11,7 +11,8 @@ export class GameStateService {
   public userRef: FirebaseObjectObservable<any>;
   public userSubscription: Subscription;
   public gameParams: FirebaseObjectObservable<any>;
-  public upgradeTypes: FirebaseObjectObservable<any>[];
+  public upgrades: FirebaseObjectObservable<any>;
+  public upgradeTypes: string[];
   private userIsBot: boolean;
   constructor(private af: AngularFire, private _auth: AuthService) {
     console.log("GameStateService: constructor");
@@ -22,11 +23,9 @@ export class GameStateService {
       this._auth.subscribeLogin(() => this.loadUserData());
     }
     this.gameParams = this.af.database.object('/game-params');
+    this.upgrades = this.af.database.object('/upgrades');
     this.gameParams.subscribe(params => {
-      this.upgradeTypes = [];
-      for (let i = 0, l = params.upgradeTypes.length; i < l; i++) {
-        this.upgradeTypes.push(this.af.database.object(params.upgradeTypes[i]));
-      }
+      this.upgradeTypes = params.upgradeTypes;
     });
   }
 
