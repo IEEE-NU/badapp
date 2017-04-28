@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, EventEmitter, Output, ViewChild, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { MdButton } from "@angular/material";
 import { Player } from "../../classes";
 import { GameStateService } from "../../services/game-state.service";
