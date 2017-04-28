@@ -30,6 +30,6 @@ export class AdminComponent {
         newUpgrades[upgrades[i].id] = upgrades[i];
       }
     });
-    this._gameState.upgrades.set(newUpgrades);
+    this._gameState.upgradesRef.set(newUpgrades);
   }
 }

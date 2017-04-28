@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GameStateService } from "../../services/game-state.service";
+import { Upgrade } from "../../classes";
 
 @Component({
   selector: 'upgrade-tab',
@@ -12,4 +13,7 @@ export class UpgradeTabComponent implements OnInit {
   ngOnInit() {
   }
 
+  buyUpgrade(upgrade: Upgrade) {
+    
+  }
 }

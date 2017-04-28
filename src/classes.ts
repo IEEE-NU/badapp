@@ -5,6 +5,7 @@ export class Player {
     photo: string;
     title: string;
     admin: boolean;
+    banned: boolean;
     constructor(id: string, name: string, nuggets: number, photo: string, title: string) {
         this.id = id;
         this.name = name;
@@ -25,4 +26,8 @@ export class Upgrade {
     stat: string;
     stat_change: number;
     max: number;
+}
+
+export class UpgradeObj {
+    [id: string]: Upgrade
 }

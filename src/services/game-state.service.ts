@@ -3,7 +3,7 @@ import { FirebaseObjectObservable, AngularFire } from "angularfire2";
 import { Subscription } from "rxjs/Subscription";
 
 import { AuthService } from "./auth.service";
-import { Player } from "../classes";
+import { Player, UpgradeObj } from "../classes";
 
 @Injectable()
 export class GameStateService {
@@ -11,22 +11,19 @@ export class GameStateService {
   public userRef: FirebaseObjectObservable<any>;
   public userSubscription: Subscription;
   public gameParams: FirebaseObjectObservable<any>;
-  public upgrades: FirebaseObjectObservable<any>;
-  public upgradeTypes: string[];
+  public upgrades: UpgradeObj;
+  public upgradesRef: FirebaseObjectObservable<UpgradeObj>;
   private userIsBot: boolean;
   constructor(private af: AngularFire, private _auth: AuthService) {
     console.log("GameStateService: constructor");
-    console.log("GameStateService: onInit");
     if (this._auth.authenticated) {
       this.loadUserData();
     } else {
       this._auth.subscribeLogin(() => this.loadUserData());
     }
     this.gameParams = this.af.database.object('/game-params');
-    this.upgrades = this.af.database.object('/upgrades');
-    this.gameParams.subscribe(params => {
-      this.upgradeTypes = params.upgradeTypes;
-    });
+    this.upgradesRef = this.af.database.object('/upgrades');
+    this.upgradesRef.subscribe(upgrades => this.upgrades = upgrades);
   }
 
   private loadUserData(): void {
@@ -52,7 +49,7 @@ export class GameStateService {
   }
 
   generateNuggetsClick() {
-    if (this.userIsBot) return;
+    if (this.userIsBot || this.user.banned) return;
     this.userRef.$ref.transaction(user => {
       user.nuggets++;
       return user;
@@ -60,13 +57,13 @@ export class GameStateService {
   }
 
   attack(player: Player) {
-    if (this.userIsBot) return;
+    if (this.userIsBot || this.user.banned) return;
     this.af.database.object('users/' + player.id).$ref
       .transaction(user => { user.nuggets--; return user; });
   }
 
   help(player: Player) {
-    if (this.userIsBot) return;
+    if (this.userIsBot || this.user.banned) return;
     this.af.database.object('users/' + player.id).$ref
       .transaction(user => { user.nuggets++; return user; });
   }

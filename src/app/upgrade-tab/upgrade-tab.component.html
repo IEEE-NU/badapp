@@ -1,15 +1,15 @@
 <div fxLayout="row" fxLayoutAlign="stretch" fxFlex>
     <div class="upgrade-col" fxFlex *ngFor="let type of (_gameState.gameParams | async)?.upgradeTypes">
       <h1>{{ type | ucfirst }}</h1>
-      <md-card *ngFor="let upgrade of _gameState.upgrades | async | values | filterBy: ['type']: type">
+      <md-card *ngFor="let upgrade of _gameState.upgrades | values | filterBy: ['type']: type">
         <md-card-title>{{ upgrade.name }}</md-card-title>
-        <md-card-subtitle>Owned: 0</md-card-subtitle>
+        <md-card-subtitle>Owned: {{ _gameState.user[upgrade.id] || '0' }}</md-card-subtitle>
         <img class="center-img" [src]="upgrade.picture">
         <md-card-content>
           <p>{{ upgrade.description }}</p>
         </md-card-content>
         <md-card-actions>
-          <button md-button>PURCHASE: {{ upgrade.cost }} NUGGETS</button>
+          <button md-button (onclick)="buyUpgrade(upgrade)">PURCHASE: {{ upgrade.base_cost }} NUGGETS</button>
         </md-card-actions>
       </md-card>
     </div>
