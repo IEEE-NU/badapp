@@ -40,9 +40,13 @@ export class GameStateService {
   private loadUserData(): void {
     this.userRef = this.af.database.object('users/' + this._auth.getUID());
     this.userSubscription = this.userRef.subscribe(obj => {
-      this.user = this.cast<Player>(obj, Player);
       if (!obj.$exists()) {
         this.addNewUser(this._auth.getUser());
+        return;
+      }
+      this.user = this.cast<Player>(obj, Player);
+      if (this.user.super_banned) {
+        this._auth.signOut();
       }
     });
   }
