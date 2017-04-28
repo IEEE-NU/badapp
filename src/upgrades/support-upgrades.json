@@ -12,7 +12,7 @@
         "type": "support"
     },
     {
-        "base_cost": 1000,
+        "base_cost": 200,
         "description": "Generate 4 more nuggets per help click",
         "id": "s01",
         "max": -1,
@@ -24,7 +24,7 @@
         "type": "support"
     },
     {
-        "base_cost": 100,
+        "base_cost": 400,
         "description": "Generate 8 more nuggets per help click",
         "id": "s02",
         "max": -1,
@@ -36,7 +36,7 @@
         "type": "support"
     },
     {
-        "base_cost": 100,
+        "base_cost": 800,
         "description": "Generate 16 more nuggets per help click",
         "id": "s03",
         "max": -1,
@@ -48,7 +48,7 @@
         "type": "support"
     },
     {
-        "base_cost": 100,
+        "base_cost": 1600,
         "description": "Generate 32 more nuggets per help click",
         "id": "s04",
         "max": -1,
@@ -61,12 +61,12 @@
     },
     {
         "base_cost": 100000,
-        "description": "You also gain 5% of the nuggest generated per help click",
+        "description": "You also gain 5% of the nuggets generated per help click",
         "id": "s05",
         "max": 4,
         "name": "Super support upgrade",
         "picture": "",
-        "scale_factor": 1.2,
+        "scale_factor": 2.0,
         "stat": "self_click_help",
         "stat_change": 5,
         "type": "support"

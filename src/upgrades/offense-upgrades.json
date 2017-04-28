@@ -12,7 +12,7 @@
     "type": "offense"
   },
   {
-    "base_cost": 100,
+    "base_cost": 1000,
     "description": "Increase attack power by 5",
     "id": "o01",
     "max": -1,
@@ -24,7 +24,7 @@
     "type": "offense"
   },
   {
-    "base_cost": 100,
+    "base_cost": 5000,
     "description": "Increase attack power by 10",
     "id": "o02",
     "max": -1,
@@ -36,7 +36,7 @@
     "type": "offense"
   },
   {
-    "base_cost": 100,
+    "base_cost": 50000,
     "description": "Increase attack power by 50",
     "id": "o03",
     "max": -1,
@@ -48,7 +48,7 @@
     "type": "offense"
   },
   {
-    "base_cost": 100,
+    "base_cost": 150000,
     "description": "Increase attack power by 100",
     "id": "o04",
     "max": -1,
@@ -60,19 +60,19 @@
     "type": "offense"
   },
   {
-    "base_cost": 100,
+    "base_cost": 100000,
     "description": "Deal 2% more damage per attack",
     "id": "o05",
     "max": -1,
     "name": "Attack upgrade X",
     "picture": "",
-    "scale_factor": 1.07,
+    "scale_factor": 1.25,
     "stat": "rel_attack",
     "stat_change": 2,
     "type": "offense"
   },
   {
-    "base_cost": 100,
+    "base_cost": 500000,
     "description": "Steal 1% more damage as nuggets",
     "id": "o06",
     "max": 50,

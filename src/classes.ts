@@ -6,7 +6,7 @@ export class Player {
     title: string;
     admin: boolean;
     banned: boolean;
-    super_banned: boolean;
+    superBanned: boolean;
     attacking: string;
     helping: string;
     [upgradeId: string]: any;
