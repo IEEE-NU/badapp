@@ -1,7 +1,7 @@
-[
+  [
   {
     "base_cost": 100,
-    "description": "Block 1 damage from every attack",
+    "description": "Edible for nourishment after a long day of warfare. Block 1 damage from every attack.",
     "id": "d00",
     "max": -1,
     "name": "Nugget shield",
@@ -13,7 +13,7 @@
   },
   {
     "base_cost": 800,
-    "description": "Block 5 damage from every attack",
+    "description": "When in Rome... Block 5 damage from every attack.",
     "id": "d01",
     "max": -1,
     "name": "Nugget phalanx",
@@ -25,7 +25,7 @@
   },
   {
     "base_cost": 4000,
-    "description": "Block 10 damage from every attack",
+    "description": "Well, look, we’re going to have a border. It’s going to be a real border, and we’re going to build a wall and it’s going to be a serious wall. Just remember that. And you remember I said it. It's going to be a serious wall. It's going to be a real wall. It's not going to be a wall that they just climb up, and you know, you see what they do, over. Block 10 damage from every attack.",
     "id": "d02",
     "max": -1,
     "name": "Nugget wall",
@@ -37,7 +37,7 @@
   },
   {
     "base_cost": 40000,
-    "description": "Block 50 damage from every attack",
+    "description": "The walls are steep, slick, and perfect for pouring hot oil down, resulting in the delicious smell of nuggets and burning atttackers. Block 50 damage from every attack.",
     "id": "d03",
     "max": -1,
     "name": "Nugget castle",
@@ -49,7 +49,7 @@
   },
   {
     "base_cost": 125000,
-    "description": "Block 100 damage from every attack",
+    "description": "Block 100 damage from every attack.",
     "id": "d04",
     "max": -1,
     "name": "Nugget forcefield",
@@ -61,7 +61,7 @@
   },
   {
     "base_cost": 100,
-    "description": "Block 1% damage from every attack",
+    "description": "Block 1% damage from every attack.",
     "id": "d05",
     "max": 5,
     "name": "Relative defense upgrade 1",
@@ -73,7 +73,7 @@
   },
   {
     "base_cost": 5000,
-    "description": "Block 5% damage from every attack",
+    "description": "Block 5% damage from every attack.",
     "id": "d06",
     "max": 5,
     "name": "Relative defense upgrade 2",
@@ -85,7 +85,7 @@
   },
   {
     "base_cost": 100000,
-    "description": "Block 10% damage from every attack",
+    "description": "Block 10% damage from every attack.",
     "id": "d07",
     "max": 5,
     "name": "Relative defense upgrade 3",

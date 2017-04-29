@@ -1,7 +1,7 @@
 [
   {
     "base_cost": 100,
-    "description": "Increase attack power by 1.",
+    "description": "A nugget on a stick. A very, very sharp nugget. Increase attack power by 1.",
     "id": "o00",
     "max": -1,
     "name": "Nugget spear",
@@ -13,7 +13,7 @@
   },
   {
     "base_cost": 1000,
-    "description": "Increase attack power by 5.",
+    "description": "Also comes in pocket-sized spray canisters. Increase attack power by 5.",
     "id": "o01",
     "max": -1,
     "name": "Nugget mace",
@@ -25,7 +25,7 @@
   },
   {
     "base_cost": 5000,
-    "description": "Increase attack power by 10.",
+    "description": "These cuties are sure to fly their way into and through your heart! Increase attack power by 10.",
     "id": "o02",
     "max": -1,
     "name": "Nugget cannon",
@@ -37,7 +37,7 @@
   },
   {
     "base_cost": 50000,
-    "description": "Increase attack power by 50.",
+    "description": "Meets, Shoots & leaves. Increase attack power by 50.",
     "id": "o03",
     "max": -1,
     "name": "Nugget tank",

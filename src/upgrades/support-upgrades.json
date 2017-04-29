@@ -63,7 +63,7 @@
         "base_cost": 10000,
         "description": "Deals are my art form. Other people paint beautifully or write poetry. I like making deals, preferably big deals. That's how I get my kicks. You also gain 5% of the nuggets generated per help click.",
         "id": "s05",
-        "max": 5,
+        "max": 10,
         "name": "Nugget trade agreement",
         "picture": "assets/support/nugget_trade_agreement.jpg",
         "scale_factor": 2.0,
