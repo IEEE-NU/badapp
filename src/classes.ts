@@ -34,6 +34,10 @@ export class Player {
         return 1 + this.click_prod;
     }
 
+    public get nuggetsPerSecond(): number {
+        return Math.ceil(this.nuggetsPerClick * this.sec_prod);
+    }
+
     public get damagePerClick(): number {
         return 1 + Math.round(this.attack + this.attack * this.rel_attack);
     }
@@ -48,6 +52,18 @@ export class Player {
 
     public upgradeCount(upgrade: Upgrade): number {
         return this[upgrade.id] || 0;
+    }
+
+    public upgradeCost(upgrade: Upgrade): number {
+        return Math.round(upgrade.base_cost
+            * Math.pow(upgrade.scale_factor, this.upgradeCount(upgrade)));
+    }
+
+    public canBuy(upgrade: Upgrade): boolean {
+        if (upgrade.max > 0 && this.upgradeCount(upgrade) >= upgrade.max) {
+            return false;
+        }
+        return this.upgradeCost(upgrade) <= this.nuggets;
     }
 
     public changeNuggets(n: number): void {
@@ -80,7 +96,7 @@ export class Player {
     }
 
     public addUpgrade(upgrade: Upgrade): void {
-        const cost = upgrade.cost(this);
+        const cost = this.upgradeCost(upgrade);
         this.changeNuggets(-cost);
         this[upgrade.id] = this.upgradeCount(upgrade) + 1;
         this.score += Math.round(cost / 2);
@@ -121,9 +137,4 @@ export class Upgrade {
     stat: string;
     stat_change: number;
     max: number;
-
-    public cost(user: Player) {
-        if (user == null) return;
-        return Math.round(this.base_cost * Math.pow(this.scale_factor, user.upgradeCount(this)));
-    }
 }

@@ -3,13 +3,13 @@
     <h1>{{ type | ucfirst }}</h1>
     <md-card *ngFor="let upgrade of gameState.upgradesAsync | async | filterBy: ['type']: type; trackBy: upgradeTrackBy">
       <md-card-title>{{ upgrade.name }}</md-card-title>
-      <md-card-subtitle>Owned: {{ user?.upgradeCount(upgrade) }}</md-card-subtitle>
+      <md-card-subtitle>Owned: {{ user?.upgradeCount(upgrade) }}{{ upgrade.max > 0 ? ', max: ' + upgrade.max : ''}}</md-card-subtitle>
       <img class="center-img" [src]="upgrade.picture">
       <md-card-content>
         <p>{{ upgrade.description }}</p>
       </md-card-content>
       <md-card-actions>
-        <button md-button [disabled]="user?.nuggets < upgrade.cost(user)" (click)="gameState.buyUpgrade(upgrade)">PURCHASE: {{ upgrade.cost(user) }} NUGGETS</button>
+        <button md-button [disabled]="!user?.canBuy(upgrade)" (click)="gameState.buyUpgrade(upgrade)">PURCHASE: {{ user?.upgradeCost(upgrade) }} NUGGETS</button>
       </md-card-actions>
     </md-card>
   </div>
