@@ -68,8 +68,13 @@ export class Player {
 
     public changeNuggets(n: number): void {
         if (!n) return;
-        this.nuggets += n;
-        this.score += n;
+        if (n > this.nuggets) {
+            this.score -= this.nuggets;
+            this.nuggets = 0;
+        } else {
+            this.nuggets += n;
+            this.score += n;
+        }
         this.updateTitle();
     }
 
