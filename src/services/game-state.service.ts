@@ -159,7 +159,6 @@ export class GameStateService {
 
   buyUpgrade(upgrade: Upgrade): void {
     if (!this.canDoStuff) return;
-    console.log("Buying upgrade " + upgrade.name);
     if (!this.user.canBuy(upgrade)) return;
     this.userRef.$ref.transaction(user => {
       user = this.cast<Player>(user, Player);

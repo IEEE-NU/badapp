@@ -152,6 +152,5 @@ export class Nugget {
         this.y = y;
         this.xVelocity = xVelocity;
         this.yVelocity = yVelocity;
-        console.log(xVelocity, yVelocity);
     }
 }

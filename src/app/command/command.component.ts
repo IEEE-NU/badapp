@@ -35,8 +35,6 @@ export class CommandComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.canvas = this.canvasRef.nativeElement;
-    console.log(this.canvas.offsetHeight);
-    console.log(this.canvas.offsetWidth);
     this.GRAVITY = 1.23 * this.canvas.offsetHeight;
     this.MIN_Y_VEL = 0.674846625766871 * this.canvas.offsetHeight;
     this.MAX_Y_VEL = 1.10 * this.canvas.offsetHeight;
