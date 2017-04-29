@@ -27,6 +27,7 @@ export class GameStateService {
     }
     this.gameParamsRef = this.af.database.object('/game-params');
     this.gameParamsRef.subscribe(params => {
+      this.gameParams = params;
       if (params.gameVersion > this.gameVersion) {
         location.reload();
       }
