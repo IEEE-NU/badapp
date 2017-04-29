@@ -9,7 +9,7 @@ import { Subscription } from "rxjs/Subscription";
 
 @Injectable()
 export class GameStateService {
-  private gameVersion = 6;
+  private gameVersion = 7;
   public user: Player;
   public userRef: FirebaseObjectObservable<Player>;
   public userAsync: Observable<Player>;
