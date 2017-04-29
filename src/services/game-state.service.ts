@@ -5,20 +5,22 @@ import { MdSnackBar } from "@angular/material";
 
 import { AuthService } from "./auth.service";
 import { Player, Upgrade } from "../classes";
+import { Subscription } from "rxjs/Subscription";
 
 @Injectable()
 export class GameStateService {
-  private gameVersion = 4;
+  private gameVersion = 5;
   public user: Player;
   public userRef: FirebaseObjectObservable<Player>;
   public userAsync: Observable<Player>;
   public gameParams: any;
   public gameParamsRef: FirebaseObjectObservable<any>;
+  public gameParamsSub: Subscription;
   public upgrades: Upgrade[] = [];
   public upgradesRef: FirebaseObjectObservable<any>;
   public upgradesAsync: Observable<Upgrade[]>;
   attackTimeout: number;
-  healTimeout: number;
+  helpTimeout: number;
   constructor(private af: AngularFire, private _auth: AuthService, private snackbar: MdSnackBar) {
     console.log("GameStateService: constructor");
     if (this._auth.authenticated) {
@@ -46,7 +48,7 @@ export class GameStateService {
   private loadUserData(): void {
     this.userRef = this.af.database.object('users/' + this._auth.getUID());
     this.userAsync = this.userRef.map(u => this.cast<Player>(u, Player));
-    this.userAsync.subscribe(u => {
+    const userSub = this.userAsync.subscribe(u => {
       if (!u.$exists()) {
         this.addNewUser(this._auth.getUser());
         return;
@@ -56,6 +58,15 @@ export class GameStateService {
         this._auth.signOut();
       }
     });
+    // GIMME MY NUGS
+    const nuggetInterval = setInterval(() => this.tickNuggets(), 1000);
+
+    // Clean up if the user logs out
+    this._auth.subscribeLogout(() => {
+      clearInterval(nuggetInterval);
+      this.gameParamsSub.unsubscribe();
+      userSub.unsubscribe();
+    });
   }
 
   private addNewUser(user: firebase.User) {
@@ -64,6 +75,23 @@ export class GameStateService {
         [user.uid]: new Player(user.uid, user.displayName, user.photoURL)
       }
     );
+  }
+
+  tickNuggets(): void {
+    if (!this.canDoStuff) return;
+    this.userRef.$ref.transaction(user => {
+      if (!user) return;
+      user = this.cast<Player>(user, Player);
+      user.changeNuggets(user.nuggetsPerSecond);
+      return user;
+    });
+  }
+
+  setUserProperty(prop: string, value: any): void {
+    this.userRef.$ref.transaction(user => {
+      user[prop] = value;
+      return user;
+    });
   }
 
   changeSelfNuggets(n: number): void {
@@ -89,23 +117,28 @@ export class GameStateService {
     this.changeSelfNuggets(this.user.nuggetsPerClick);
   }
 
-  attack(player: Player): boolean {
+  attack(player: Player) {
     if (!this.canDoStuff) return;
     let attack = this.user.damagePerClick;
     let defense = Math.round(player.abs_defense + attack * player.rel_defense);
     let damage = attack - defense;
     if (damage < 0) {
       this.snackbar.open("No damage done!", "OK", { duration: 2000 });
-      return false;
+      return;
     }
     this.snackbar.open(`Dealt ${damage} damage`, "OK", { duration: 2000 });
     this.changeOtherNuggets(player, -damage);
     this.changeSelfNuggets(Math.round(damage * this.user.steal));
 
-    this.userRef.$ref.update({ attacking: player.id });
-    clearTimeout(this.attackTimeout);
-    this.attackTimeout = setTimeout(() => this.userRef.$ref.update({ attacking: '' }), 500);
-    return true;
+    if (this.attackTimeout) {
+      clearTimeout(this.attackTimeout);
+    } else {
+      this.setUserProperty("attacking", player.id);
+    }
+    this.attackTimeout = setTimeout(() => {
+      this.setUserProperty("attacking", '');
+      this.attackTimeout = 0;
+    }, 500);
   }
 
   help(player: Player) {
@@ -113,9 +146,15 @@ export class GameStateService {
     this.changeOtherNuggets(player, this.user.helpPerClick);
     this.changeSelfNuggets(this.user.selfHelpPerClick);
 
-    this.userRef.$ref.update({ helping: player.id });
-    clearTimeout(this.healTimeout);
-    this.healTimeout = setTimeout(() => this.userRef.$ref.update({ helping: '' }), 500);
+    if (this.helpTimeout) {
+      clearTimeout(this.helpTimeout);
+    } else {
+      this.setUserProperty("helping", player.id);
+    }
+    this.helpTimeout = setTimeout(() => {
+      this.setUserProperty("helping", '');
+      this.helpTimeout = 0;
+    }, 500);
   }
 
   buyUpgrade(upgrade: Upgrade): void {

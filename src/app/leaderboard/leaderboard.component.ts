@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Player } from "../../classes";
 import { GameStateService } from "../../services/game-state.service";
 import { FirebaseListObservable, AngularFire } from "angularfire2";
@@ -6,7 +6,8 @@ import { FirebaseListObservable, AngularFire } from "angularfire2";
 @Component({
   selector: 'leaderboard-panel',
   templateUrl: './leaderboard.component.html',
-  styleUrls: ['./leaderboard.component.scss']
+  styleUrls: ['./leaderboard.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LeaderboardComponent {
   leaderboard: FirebaseListObservable<any>;
