@@ -1,47 +1,47 @@
-<md-grid-list id="command" cols="2" rowHeight="fit">
-  <md-grid-tile rowspan="2">
-    <md-grid-tile-header>
-      <h1 class="overlay-text">Click to get {{ (gameState.userAsync | async)?.nuggetsPerClick }} nugget{{ (gameState.userAsync | async)?.nuggetsPerClick > 1 ? 's' : '' }}!</h1>
-    </md-grid-tile-header>
-    <img id="generate_nuggets" src="assets/nugget_bucket.jpg" (click)="gameState.generateNuggets()" />
-    <md-grid-tile-footer>
-      <h1 class="overlay-text">{{ (gameState.userAsync | async)?.nuggets }}</h1>
-    </md-grid-tile-footer>
-  </md-grid-tile>
-  <md-grid-tile rowspan="2">
-    <div id="stats" fxFlex fxFlexAlign="start">
-      <h1>Stats</h1>
-      <h3>Production</h3>
-      <ul>
-        <li>Nuggets per click: {{ (gameState.userAsync | async)?.nuggetsPerClick }}</li>
-        <li>Nuggets per second: {{ (gameState.userAsync | async)?.nuggetsPerSecond }}</li>
-      </ul>
-      <h3>Offense</h3>
-      <ul>
-        <li>Base attack per click: {{ 1 + (gameState.userAsync | async)?.attack }}</li>
-        <li>Multiplier: {{ 1 + (gameState.userAsync | async)?.rel_attack }}</li>
-        <li>Total attack per click: {{ (gameState.userAsync | async)?.damagePerClick }}</li>
-        <li>Percent of damage stolen per click: {{ (gameState.userAsync | async)?.steal }}</li>
-      </ul>
-      <h3>Defense</h3>
-      <ul>
-        <li>Base defense: {{ (gameState.userAsync | async)?.abs_defense }}</li>
-        <li>Percent defense: {{ (gameState.userAsync | async)?.rel_defense }}</li>
-      </ul>
-      <h3>Support</h3>
-      <ul>
-        <li>Nuggets per click (them): {{ (gameState.userAsync | async)?.helpPerClick }}</li>
-        <li>Nuggets per click (you): {{ (gameState.userAsync | async)?.selfHelpPerClick }}</li>
-      </ul>
+<div id="nugget_place" fxFlex>
+  <div class="overlay">
+    <h1 class="overlay-text">Click for {{ user?.nuggetsPerClick }} nugget{{ user?.nuggetsPerClick > 1 ? 's' : '' }}!</h1>
+  </div>
+  <div id="generate_nuggets" (click)="bucketClick()" fxFill fxLayout="column" fxLayoutAlign="center center">
+    <canvas #canvas id="canvas"></canvas>
+    <img id="bucket" src="assets/nugget_bucket.png" />
+  </div>
+  <div class="overlay overlay-bottom">
+    <h1 class="overlay-text">{{ user?.nuggets }} nugget{{ user?.nuggets === 1 ? '' : 's' }}</h1>
+  </div>
+</div>
 
-      <h2>How does damage work?</h2>
-      <p>total attack = base attack * multiplier</p>
-      <p>damage = total attack - base defense - total attack * percent defense</p>
+<div id="stats" fxFlex fxFlexAlign="start">
+  <h1>Stats</h1>
+  <h3>Production</h3>
+  <ul>
+    <li>Nuggets per click: {{ user?.nuggetsPerClick }}</li>
+    <li>Nuggets per second: {{ user?.nuggetsPerSecond }}</li>
+  </ul>
+  <h3>Offense</h3>
+  <ul>
+    <li>Base attack per click: {{ 1 + user?.attack }}</li>
+    <li>Multiplier: {{ 1 + user?.rel_attack }}</li>
+    <li>Total attack per click: {{ user?.damagePerClick }}</li>
+    <li>Percent of damage stolen per click: {{ user?.steal }}</li>
+  </ul>
+  <h3>Defense</h3>
+  <ul>
+    <li>Base defense: {{ user?.abs_defense }}</li>
+    <li>Percent defense: {{ user?.rel_defense }}</li>
+  </ul>
+  <h3>Support</h3>
+  <ul>
+    <li>Nuggets per click (them): {{ user?.helpPerClick }}</li>
+    <li>Nuggets per click (you): {{ user?.selfHelpPerClick }}</li>
+  </ul>
 
-      <h2>What is the score for?</h2>
-      <p>The winner is whoever has the highest score at the end.</p>
-      <p>score = nuggets + total spent on upgrades / 2</p>
-      <p>Thus, buying upgrades decreases your score, but locks it in</p>
-    </div>
-  </md-grid-tile>
-</md-grid-list>
+  <h2>How does damage work?</h2>
+  <p>total attack = base attack * multiplier</p>
+  <p>damage = total attack - base defense - total attack * percent defense</p>
+
+  <h2>What is the score for?</h2>
+  <p>The winner is whoever has the highest score at the end.</p>
+  <p>score = nuggets + total spent on upgrades / 2</p>
+  <p>Thus, buying upgrades decreases your score, but locks it in</p>
+</div>

@@ -3,28 +3,53 @@
     flex: 1;
 }
 
-md-grid-tile {
-	overflow: auto;
+#nugget_place {
+	position: relative;
 }
 
-.overlay-text {
-	text-align: center !important;
-	font-size: 2em !important;
+.overlay {
+	display: flex;
+	align-items: center;
+	height: 48px;
+	color: #fff;
+	background: rgba(0,0,0,.38);
+	overflow: hidden;
+	padding: 0 16px;
+	font-size: 16px;
+	position: absolute;
+	left: 0;
+	right: 0;
+}
+
+.overlay-bottom {
+	bottom: 0;
 }
 
 #generate_nuggets {
 	cursor: pointer;
+}
+
+#canvas {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+}
+
+#bucket {
 	transition: all .2s ease-in-out;
 }
 
-#generate_nuggets:hover {
+#generate_nuggets:hover > #bucket {
 	transform: scale(1.05);
 }
 
-#generate_nuggets:active {
+#generate_nuggets:active > #bucket {
 	transform: scale(0.95);
 }
 
 #stats {
+	height: 100%;
 	padding: 12px;
+	overflow: auto;
 }

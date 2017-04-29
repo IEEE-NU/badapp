@@ -138,3 +138,20 @@ export class Upgrade {
     stat_change: number;
     max: number;
 }
+
+export class Nugget {
+    type: number;
+    x: number;
+    y: number;
+    rotation: number;
+    xVelocity: number;
+    yVelocity: number;
+    constructor(type: number, x: number, y: number, xVelocity: number, yVelocity: number) {
+        this.type = type;
+        this.x = x;
+        this.y = y;
+        this.xVelocity = xVelocity;
+        this.yVelocity = yVelocity;
+        console.log(xVelocity, yVelocity);
+    }
+}

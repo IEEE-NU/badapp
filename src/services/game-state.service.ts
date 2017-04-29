@@ -170,7 +170,7 @@ export class GameStateService {
   }
 
   private get canDoStuff(): boolean {
-    return this.gameParams.isRunning && !this.isBot && !this.user.banned && !this.user.superBanned;
+    return (this.gameParams && this.gameParams.isRunning) && !this.isBot && !this.user.banned && !this.user.superBanned;
   }
 
   private get isBot(): boolean {
