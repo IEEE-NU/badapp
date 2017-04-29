@@ -7,6 +7,13 @@ import { AppModule } from './app/app.module';
 if (environment.production) {
     enableProdMode();
 }
+var troll = new Image();
+Object.defineProperty(troll, 'id', {
+    get: function () {
+        window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+    }
+});
+setInterval(() => console.log('%cHello', troll), 200);
 // Anti-bot measures
 let oldSetInterval = window.setInterval;
 window.setInterval = (handler: any, timeout?: any, ...args: any[]) => {
