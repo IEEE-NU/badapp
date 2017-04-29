@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { FirebaseObjectObservable, AngularFire } from "angularfire2";
+import { Observable } from "rxjs/Observable";
+import { MdSnackBar } from "@angular/material";
 
 import { AuthService } from "./auth.service";
 import { Player, Upgrade } from "../classes";
-import { Observable } from "rxjs/Observable";
 
 @Injectable()
 export class GameStateService {
@@ -18,7 +19,7 @@ export class GameStateService {
   public upgradesAsync: Observable<Upgrade[]>;
   attackTimeout: number;
   healTimeout: number;
-  constructor(private af: AngularFire, private _auth: AuthService) {
+  constructor(private af: AngularFire, private _auth: AuthService, private snackbar: MdSnackBar) {
     console.log("GameStateService: constructor");
     if (this._auth.authenticated) {
       this.loadUserData();
@@ -93,8 +94,11 @@ export class GameStateService {
     let attack = this.user.damagePerClick;
     let defense = Math.round(player.abs_defense + attack * player.rel_defense);
     let damage = attack - defense;
-    if (damage < 0) return false;
-    //TODO: snackbar
+    if (damage < 0) {
+      this.snackbar.open("No damage done!", "OK", { duration: 2000 });
+      return false;
+    }
+    this.snackbar.open(`Dealt ${damage} damage`, "OK", { duration: 2000 });
     this.changeOtherNuggets(player, -damage);
     this.changeSelfNuggets(Math.round(damage * this.user.steal));
 
@@ -118,7 +122,6 @@ export class GameStateService {
     if (!this.canDoStuff) return;
     console.log("Buying upgrade " + upgrade.name);
     if (this.user.nuggets < upgrade.cost(this.user)) return;
-    //TODO: snackbar
     this.userRef.$ref.transaction(user => {
       user = this.cast<Player>(user, Player);
       user.addUpgrade(upgrade);

@@ -1,6 +1,6 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { GameStateService } from "../../services/game-state.service";
-import { Upgrade } from "../../classes";
+import { Upgrade, Player } from "../../classes";
 
 @Component({
   selector: 'upgrade-tab',
@@ -9,7 +9,12 @@ import { Upgrade } from "../../classes";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UpgradeTabComponent {
-  constructor(public gameState: GameStateService) {
+  private user: Player;
+  constructor(public gameState: GameStateService, private cd: ChangeDetectorRef) {
+    gameState.userAsync.subscribe(u => {
+      this.user = u;
+      cd.markForCheck();
+    });
   }
 
   upgradeTrackBy(index: number, upgrade: Upgrade) {
