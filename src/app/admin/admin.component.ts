@@ -19,7 +19,7 @@ export class AdminComponent {
 
   gameParamChange(event: Event) {
     let element = <HTMLInputElement>event.srcElement;
-    this.gameState.gameParams.$ref.set(JSON.parse(element.value));
+    this.gameState.gameParamsRef.$ref.set(JSON.parse(element.value));
   }
 
   upgradeChange() {

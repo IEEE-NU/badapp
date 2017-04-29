@@ -11,7 +11,8 @@ export class GameStateService {
   public user: Player;
   public userRef: FirebaseObjectObservable<Player>;
   public userAsync: Observable<Player>;
-  public gameParams: FirebaseObjectObservable<any>;
+  public gameParams: any;
+  public gameParamsRef: FirebaseObjectObservable<any>;
   public upgrades: Upgrade[] = [];
   public upgradesRef: FirebaseObjectObservable<any>;
   public upgradesAsync: Observable<Upgrade[]>;
@@ -24,8 +25,8 @@ export class GameStateService {
     } else {
       this._auth.subscribeLogin(() => this.loadUserData());
     }
-    this.gameParams = this.af.database.object('/game-params');
-    this.gameParams.subscribe(params => {
+    this.gameParamsRef = this.af.database.object('/game-params');
+    this.gameParamsRef.subscribe(params => {
       if (params.gameVersion > this.gameVersion) {
         location.reload();
       }
@@ -82,12 +83,12 @@ export class GameStateService {
   }
 
   generateNuggets() {
-    if (this.isBot || this.user.banned) return;
+    if (!this.canDoStuff) return;
     this.changeSelfNuggets(this.user.nuggetsPerClick);
   }
 
   attack(player: Player): boolean {
-    if (this.isBot || this.user.banned) return;
+    if (!this.canDoStuff) return;
     let attack = this.user.damagePerClick;
     let defense = Math.round(player.abs_defense + attack * player.rel_defense);
     let damage = attack - defense;
@@ -103,7 +104,7 @@ export class GameStateService {
   }
 
   help(player: Player) {
-    if (this.isBot || this.user.banned) return;
+    if (!this.canDoStuff) return;
     this.changeOtherNuggets(player, this.user.helpPerClick);
     this.changeSelfNuggets(this.user.selfHelpPerClick);
 
@@ -113,6 +114,7 @@ export class GameStateService {
   }
 
   buyUpgrade(upgrade: Upgrade): void {
+    if (!this.canDoStuff) return;
     console.log("Buying upgrade " + upgrade.name);
     if (this.user.nuggets < upgrade.cost(this.user)) return;
     //TODO: snackbar
@@ -122,6 +124,10 @@ export class GameStateService {
       user.calculateStats(this.upgrades);
       return user;
     });
+  }
+
+  private get canDoStuff(): boolean {
+    return this.gameParams.isRunning && !this.isBot && !this.user.banned && !this.user.superBanned;
   }
 
   private get isBot(): boolean {

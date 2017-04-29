@@ -1,8 +1,8 @@
 <div fxLayout="column" fxFill>
   <h3>Game parameters</h3>
-  <textarea fxFlex="1 1 auto" (change)="gameParamChange($event)">{{ gameState.gameParams | async | json }}</textarea>
+  <textarea fxFlex="1 1 auto" (change)="gameParamChange($event)">{{ gameState.gameParamsRef | async | json }}</textarea>
 
-  <ng-template ngFor [ngForOf]="(gameState.gameParams | async)?.upgradeTypes" let-type>
+  <ng-template ngFor [ngForOf]="(gameState.gameParamsRef | async)?.upgradeTypes" let-type>
     <h3>{{ type | ucfirst }} upgrades</h3>
     <textarea #upgradeText fxFlex="1 1 auto" (change)="upgradeChange()">{{ gameState.upgradesAsync | async | filterBy: ['type']: type | json }}</textarea>
   </ng-template>
