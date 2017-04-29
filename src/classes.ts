@@ -22,6 +22,7 @@ export class Player {
     rel_defense: number;
     click_help: number;
     self_click_help: number;
+    king_killer: number = 0;
     [upgradeId: string]: any;
     constructor(id: string, name: string, photo: string) {
         this.id = id;
@@ -117,6 +118,7 @@ export class Player {
         this.rel_defense = 0;
         this.click_help = 0;
         this.self_click_help = 0;
+        this.king_killer = 0;
     }
 
     public calculateStats(upgrades: Upgrade[]): void {

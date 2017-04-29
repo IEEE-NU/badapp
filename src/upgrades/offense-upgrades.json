@@ -1,5 +1,17 @@
 [
   {
+    "base_cost": 500000,
+    "description": "Deal an additional 2% of the target's nuggets as damage.",
+    "id": "o09",
+    "max": 5,
+    "name": "King killer",
+    "picture": "https://f4.bcbits.com/img/0001091536_10.jpg",
+    "scale_factor": 5,
+    "stat": "king_killer",
+    "stat_change": 0.02,
+    "type": "offense"
+  },
+  {
     "base_cost": 100,
     "description": "A nugget on a stick. A very, very sharp nugget. Increase attack power by 1.",
     "id": "o00",

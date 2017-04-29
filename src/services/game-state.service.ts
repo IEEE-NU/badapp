@@ -9,7 +9,7 @@ import { Subscription } from "rxjs/Subscription";
 
 @Injectable()
 export class GameStateService {
-  private gameVersion = 8;
+  private gameVersion = 9;
   public user: Player;
   public userRef: FirebaseObjectObservable<Player>;
   public userAsync: Observable<Player>;
@@ -119,12 +119,14 @@ export class GameStateService {
 
   attack(player: Player) {
     if (!this.canDoStuff) return;
-    let attack = this.user.damagePerClick;
+    let attack = this.user.damagePerClick + Math.round(player.nuggets * this.user.king_killer) || 0;
     let defense = Math.round(player.abs_defense + attack * player.rel_defense);
     let damage = attack - defense;
     if (damage < 0) {
       this.snackbar.open("No damage done!", "OK", { duration: 2000 });
       return;
+    } else if (damage > player.nuggets) {
+      damage = player.nuggets;
     }
     this.snackbar.open(`Dealt ${damage} damage`, "OK", { duration: 2000 });
     this.changeOtherNuggets(player, -damage);
