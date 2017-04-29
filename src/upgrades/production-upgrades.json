@@ -60,15 +60,51 @@
         "type": "production"
     },
     {
-        "base_cost": 1000000,
+        "base_cost": 500,
         "description": "Old MacDonald had a farm, until the rise of factory farms, unshrinkable piles of bills and debts, and a bad back finally put him out of business. How had it come to this? He remembered when his daughter had tried to set up an AdWords campaign for him. \"My father and his father before him sold their crops face-to-face and people bought it on the merits of their soil and sweat. Why should I beg strangers to buy my goods on Google?\" he'd replied indignantly. He remembered his golden days, as a young man with a firmness earned through harvest after harvest among the amber waves of the American heartland. He remembered Susan, the sun in his sky, who he never thought would agreed to marry him and stay on the farm, who he buried in a shady copse on the far edge of his property. He only hoped the next owner of his farm, after the bank, might grant him an easement to rest next to her, when the time came. MacDonald took one final walk through his fields, grasping at memories of better days and hoarding them for worse, but the farm was not as alive as he recalled. No cows mooed at his passing, no wheat rustled in the breeze. Even the insects seemed to taken their creaks elsewhere. Unable to return to rosier days, he left 31310 Valley Road with no closure but plenty of good memories to grieve for. Generates 5% of nuggets per click per second.",
         "id": "p10",
         "max": -1,
         "name": "Old MacDonald's Farm",
         "picture": "assets/production/nugget_farm.jpg",
-        "scale_factor": 1.1,
+        "scale_factor": 1.5,
         "stat": "sec_prod",
         "stat_change": 0.05,
+        "type": "production"
+    },
+    {
+        "base_cost": 2000,
+        "description": "Buy fried, sell cold! The insider trading helps, too. Generates 10% of nuggets per click per second.",
+        "id": "p11",
+        "max": -1,
+        "name": "Nugget investing",
+        "picture": "assets/production/nugget_stock_market.jpg",
+        "scale_factor": 1.5,
+        "stat": "sec_prod",
+        "stat_change": 0.10,
+        "type": "production"
+    },
+    {
+        "base_cost": 8000,
+        "description": "Subprime nugget lending is all the rage right now. If you loan out enough nuggets, the governmnugget will even bail you out when something bad happens! Too bad for those families and their foreclosed nugget-homes. Generates 10% of nuggets per click per second.",
+        "id": "p11",
+        "max": -1,
+        "name": "Nugget bank",
+        "picture": "assets/production/nugget_bank.jpg",
+        "scale_factor": 1.5,
+        "stat": "sec_prod",
+        "stat_change": 0.20,
+        "type": "production"
+    },
+    {
+        "base_cost": 20000,
+        "description": "The best part of exploiting an entire country's people into producing nuggets for you with liberal use of bribes and violence? You can feed, pay, clothe, AND shelter them in nuggets! Generates 40% of nuggets per click per second.",
+        "id": "p12",
+        "max": -1,
+        "name": "Nugget republic",
+        "picture": "assets/production/nugget_republic.jpg",
+        "scale_factor": 1.5,
+        "stat": "sec_prod",
+        "stat_change": 0.40,
         "type": "production"
     }
 ]
